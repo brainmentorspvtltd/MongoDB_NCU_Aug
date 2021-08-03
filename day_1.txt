@@ -1,0 +1,397 @@
+Types of data
+- Structured - tables (row x col)
+- Unstructured - Images, Text, Videos
+- Semi-Structured - JSON, XML
+
+What is No SQL ?
+
+Key value Based
+- based on amazon's dynamo paper
+
+Column Based
+- based on google big table
+
+Document Oriented
+- JSON, XML
+
+Graph Based
+- Neo4J, Infinite Graph, FlockDB
+
+
+RDBMS vs NoSQL
+- ACID
+
+CAP/Brewer's Theorem
+- Consistency
+- Availability - No Downtime
+- Partition Tolerance
+
+CA - RDBMS
+CP - MongoDB / HBase
+AP - Cassandra / CouchDB
+
+Eventual Consistency
+- to get high availability and scability
+
+BASE - Basically, Available, Soft State, Eventual Consistency
+
+BASE Transaction/System
+
+Mongo DB Features
+- database -> collections -> documents
+- doesn't need to have pre-defined schema, we can create fields on fly
+
+- Sharding
+
+- Map/Reduce Framework
+======================
+
+Installation
+
+======================
+
+db.createCollection(name, options)
+
+Options
+- capped - True/False - fixed size collection
+- size - max size in bytes
+- AutoIndexId - automatically create index on ID Field
+- max - max documents allowed in capped collection
+
+
+Time Series Example
+
+db.createCollection("weatherReport", {timeSeries : {timeField : "timestamp", metaField : "metadata", granularity : "hours"}})
+
+db.weatherReport.insert(
+    {
+      "metadata" : [{"type" : "temperature"}],
+      "timestamp" : ISODate("2021-03-8..."),
+      "temp" : 10
+    },
+    {
+      "metadata" : [{"type" : "temperature"}],
+      "timestamp" : ISODate("2021-03-8..."),
+      "temp" : 10
+    },
+    {
+      "metadata" : [{"type" : "temperature"}],
+      "timestamp" : ISODate("2021-03-8..."),
+      "temp" : 10
+    }
+)
+
+JSON vs BSON
+
+CRUD Operations
+CRUD - Create Read Update Delete
+
+
+
+Data Types in Mongo
+- Integer
+- Double
+- Boolean
+- String
+- Arrays
+- Object
+- Binary
+- Min/Max Keys (min = -1, max = 127)
+- RegularExpression - regex
+- Symbol
+- Javascript
+- Javascript code with scope - deprecated
+- Date
+- TimeStamp
+
+
+
+CRUD - Create Read Update Delete
+
+Create
+- insert(data, options)
+- insertOne(data, options)
+- insertMany
+
+Read
+- find
+- findOne
+
+Update
+- updateOne (<filter>, <update>)
+- updateMany
+- replaceOne
+- findOneAndUpdate
+
+Delete
+- deleteOne
+- deleteMany
+- remove
+
+
+
+
+show collections;
+customers
+products
+testCollection
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6108dd3b62894fed43c061ad"),
+        "name" : "Iphone 11",
+        "price" : 56000
+}
+{
+        "_id" : ObjectId("6108dd7662894fed43c061ae"),
+        "name" : "Iphone 12 pro",
+        "price" : 156000,
+        "details" : {
+                "color" : "white",
+                "camera" : 64,
+                "processor" : "quad core"
+        }
+}
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dc4662894fed43c061ab"),
+        "name" : "John",
+        "age" : 40
+}
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{ "_id" : "101", "name" : "Sam", "age" : 50 }
+> db.customers.deleteOne({name : "Sam"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dc4662894fed43c061ab"),
+        "name" : "John",
+        "age" : 40
+}
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+> db.customers.deleteMany()
+uncaught exception: Error: find() requires query criteria :
+Bulk/this.find@src/mongo/shell/bulk_api.js:796:23
+DBCollection.prototype.deleteMany@src/mongo/shell/crud_api.js:420:20
+@(shell):1:1
+> db.customers.updateOne({age : 41}, {name : "John"})
+uncaught exception: Error: the update operation document must contain atomic operators :
+DBCollection.prototype.updateOne@src/mongo/shell/crud_api.js:565:19
+@(shell):1:1
+> db.customers.updateOne({name : "John"}, {$set })
+uncaught exception: ReferenceError: $set is not defined :
+@(shell):1:42
+> db.customers.updateOne({name : "John"}, {$set : {age : 41}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dc4662894fed43c061ab"),
+        "name" : "John",
+        "age" : 41
+}
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+> db.customers.deleteOne({age : 41})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+> db.customers.insert([)
+...     {
+...         "name" : "Max",
+...         "age" : 32,
+...         "address" : "delhi"
+...     },
+...     {
+...         "name" : "Sam",
+...         "age" : 31,
+...         "address" : "delhi"
+...     },
+...     {
+...         "name" : "Tom",
+...         "age" : 26,
+...         "address" : "pune"
+...     }
+... ]
+uncaught exception: SyntaxError: expected expression, got ')' :
+@(shell):1:21
+> db.customers.insert([
+...     {
+...         "name" : "Max",
+...         "age" : 32,
+...         "address" : "delhi"
+...     },
+...     {
+...         "name" : "Sam",
+...         "age" : 31,
+...         "address" : "delhi"
+...     },
+...     {
+...         "name" : "Tom",
+...         "age" : 26,
+...         "address" : "pune"
+...     }
+... ])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+> db.customers.explain()
+Explainable(shopping.customers)
+> db.customers.insertMany([
+...     {
+...         "name" : "Nick",
+...         "age" : 28,
+...         "address" : "delhi"
+...     },
+...     {
+...         "name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"
+...     },
+...     {
+...         "name" : "Tony",
+...         "age" : 20,
+...         "address" : "delhi"
+...     }
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6108ffdd62894fed43c061cc"),
+                ObjectId("6108ffdd62894fed43c061cd"),
+                ObjectId("6108ffdd62894fed43c061ce")
+        ]
+}
+> db.customers.insert({"name" : "Shawn", address : ["delhi", "chennai", "pune"]})
+WriteResult({ "nInserted" : 1 })
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+        "name" : "Nick",
+        "age" : 28,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+        "name" : "Tony",
+        "age" : 20,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("610900be62894fed43c061cf"),
+        "name" : "Shawn",
+        "address" : [
+                "delhi",
+                "chennai",
+                "pune"
+        ]
+}
+> db.customers.find({name : "Shawn"})
+{ "_id" : ObjectId("610900be62894fed43c061cf"), "name" : "Shawn", "address" : [ "delhi", "chennai", "pune" ] }
+> db.customers.find({name : "Shawn"})["address"]
+> ;
+> db.customers.find({name : "Shawn"}, {address : {$slice : [1]}}
+... )
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Invalid $slice syntax. The given syntax { $slice: [ 1.0 ] } did not match the find() syntax because :: Location31272: $slice array argument should be of form [skip, limit] :: The given syntax did not match the expression $slice syntax. :: caused by :: Expression $slice takes at least 2 arguments, and at most 3, but 1 were passed in.",
+        "code" : 28667,
+        "codeName" : "Location28667"
+}
+> db.customers.find({name : "Shawn"}, {address : {$slice : 1}} )
+{ "_id" : ObjectId("610900be62894fed43c061cf"), "name" : "Shawn", "address" : [ "delhi" ] }
+>
+
+
+
+
+
+
+
+
+
