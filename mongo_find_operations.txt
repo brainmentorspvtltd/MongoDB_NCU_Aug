@@ -1,0 +1,2967 @@
+CRUD Operations
+Projection
+Embedded Documents
+Array
+
+
+Query Selectors & Projection Operators
+
+Query Selectors
+- Comparison
+- Array
+- Logical
+- Element
+- Comments
+- Geospatial
+- Evaluation
+
+
+Projection Operators
+- $
+- $elemMatch
+- $meta
+- $slice
+
+
+Comparison Operatos
+- $eq
+- $gt
+- $lt
+- $gte
+- $lte
+- $in
+- $ne
+- $nin
+
+Logical Operators
+- $and
+- $or
+- $not
+- $nor
+
+
+Element Operators
+- $exists
+- $type
+
+Evaluation Operators
+- $expr
+- $jsonSchema
+- $mod
+- $text
+- $regex
+- $where
+
+
+
+> show dbs
+Flipkart   0.000GB
+TCS        0.000GB
+admin      0.000GB
+config     0.000GB
+covid_db   0.000GB
+local      0.000GB
+movies_db  0.000GB
+shopping   0.000GB
+testDB     0.000GB
+> use shopping
+switched to db shopping
+> show collections
+customers
+products
+testCollection
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+        "name" : "Nick",
+        "age" : 28,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+        "name" : "Tony",
+        "age" : 20,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("610900be62894fed43c061cf"),
+        "name" : "Shawn",
+        "address" : [
+                "delhi",
+                "chennai",
+                "pune"
+        ]
+}
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6108dd3b62894fed43c061ad"),
+        "name" : "Iphone 11",
+        "price" : 56000
+}
+{
+        "_id" : ObjectId("6108dd7662894fed43c061ae"),
+        "name" : "Iphone 12 pro",
+        "price" : 156000,
+        "details" : {
+                "color" : "white",
+                "camera" : 64,
+                "processor" : "quad core"
+        }
+}
+> use movies_db;
+switched to db movies_db
+> show collections
+movies
+top_10
+users
+> db.movies.find().pretty()
+{
+        "_id" : ObjectId("610e49533b7c8edb37a58a53"),
+        "m_id" : 101,
+        "m_name" : "Thor",
+        "m_category" : "Hollywood"
+}
+{
+        "_id" : ObjectId("610e4b143b7c8edb37a58a54"),
+        "m_id" : 102,
+        "m_name" : "Avengers",
+        "m_category" : "Hollywood",
+        "m_details" : {
+                "m_rating" : 8.5,
+                "release_date" : ISODate("2020-11-21T20:57:03Z")
+        }
+}
+{ "_id" : ObjectId("610e4c703b7c8edb37a58a55") }
+{
+        "_id" : ObjectId("610f983b144bbdd23a418156"),
+        "m_id" : 104,
+        "m_name" : "Baahubali",
+        "m_category" : "Bollywood",
+        "m_details" : {
+                "m_rating" : 8.2
+        }
+}
+{
+        "_id" : ObjectId("610f983b144bbdd23a418157"),
+        "m_id" : 105,
+        "m_name" : "Sultan",
+        "m_category" : "Bollywood",
+        "m_details" : {
+                "m_rating" : 7
+        }
+}
+{
+        "_id" : ObjectId("610f983b144bbdd23a418158"),
+        "m_id" : 106,
+        "m_name" : "Batman",
+        "m_category" : "Hollywood",
+        "m_details" : {
+                "m_rating" : 9.2,
+                "release_date" : ISODate("2010-11-09T23:36:02Z")
+        },
+        "ott" : "Netflix",
+        "sequel" : 4
+}
+> use shopping
+switched to db shopping
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6108dd3b62894fed43c061ad"),
+        "name" : "Iphone 11",
+        "price" : 56000
+}
+{
+        "_id" : ObjectId("6108dd7662894fed43c061ae"),
+        "name" : "Iphone 12 pro",
+        "price" : 156000,
+        "details" : {
+                "color" : "white",
+                "camera" : 64,
+                "processor" : "quad core"
+        }
+}
+> db.products.drop()
+true
+> show collections
+customers
+testCollection
+> db.createCollection("products")
+{ "ok" : 1 }
+> db.products.insertOne({"p_name" : "Apple Iphone 12", "p_category" : "Mobile", "p_brand" : "Apple", "p_price" : 78000, "p_color" : ["gold","silver","gray","black"], "p_rating" : 4.5, "p_description" : {"memory":128,"ram":6,"front_camera":12,"rear_camera":64,"screen_size":15.49}))
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:277
+> db.products.insertOne({"p_name" : "Apple Iphone 12", "p_category" : "Mobile", "p_brand" : "Apple", "p_price" : 78000, "p_color" : ["gold","silver","gray","black"], "p_rating" : 4.5, "p_description" : {"memory":128,"ram":6,"front_camera":12,"rear_camera":64,"screen_size":15.49}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6115ec83380c479ddaa2166c")
+}
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        }
+}
+> db.products.insertOne({"p_name" : "One Plus Nord", "p_category" : "Mobile", "p_brand" : "One Plus", "p_price" : 28000, "p_color" : ["silver","blue","black"], "p_rating" : 4.5, "p_description" : {"memory":64,"ram":6,"front_camera":18,"rear_camera":50,"screen_size":14.40}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6115ecdb380c479ddaa2166d")
+}
+> db.products.insertOne({"p_name" : "Apple Iphone 12 pro", "p_category" : "Mobile", "p_brand" : "Apple", "p_price" : 98000, "p_color" : ["gold","silver","black"], "p_rating" : 4.0, "p_description" : {"memory":128,"ram":8,"front_camera":24,"rear_camera":108,"screen_size":15.49}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6115ed1e380c479ddaa2166e")
+}
+> db.products.insertOne({"p_name" : "Apple Macbook Pro M1", "p_category" : "Laptop", "p_brand" : "Apple", "p_price" : 158000, "p_color" : ["gray","silver"], "p_rating" : 4.8, "p_description" : {"memory":256,"ram":8,"screen_size":33.78,"processor" : "Mac M1"}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6115ed8f380c479ddaa2166f")
+}
+> db.products.insertOne({"p_name" : "Asus Zenbook 13", "p_category" : "Laptop", "p_brand" : "Apple", "p_price" : 88000, "p_color" : ["gray","silver","blue"], "p_rating" : 4.3, "p_description" : {"memory":512,"ram":16,"screen_size":33.78,"processor" : "Intel Core i7"}})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6115ede5380c479ddaa21670")
+}
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        }
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        }
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        }
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        }
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        }
+}
+> db.products.findOne().pretty()
+uncaught exception: TypeError: db.products.findOne(...).pretty is not a function :
+@(shell):1:1
+> db.products.findOne()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        }
+}
+> db.customers.find().count
+function(applySkipLimit) {
+    var cmd = this._convertToCountCmd(applySkipLimit);
+
+    var res = this._db.runReadCommand(cmd);
+    if (res && res.n != null)
+        return res.n;
+    throw _getErrorWithCode(res, "count failed: " + tojson(res));
+}
+> db.customers.find().count()
+8
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+        "name" : "Nick",
+        "age" : 28,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+        "name" : "Tony",
+        "age" : 20,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("610900be62894fed43c061cf"),
+        "name" : "Shawn",
+        "address" : [
+                "delhi",
+                "chennai",
+                "pune"
+        ]
+}
+> db.customers.insertMany(["name" : "Mac",
+...         "age" : 50,
+...
+... ])
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:32
+> db.customers.insertMany([{"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"},
+... {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai""name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}])
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):20:29
+> db.customers.insertMany([{"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"}, {"name" : "Mac",         "age" : 50,         "address" : "chennai"},{"name" : "Mac",         "age" : 50,         "address" : "chennai"},{"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}, {"name" : "Mac",
+...         "age" : 50,
+...         "address" : "chennai"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6115f0b9380c479ddaa21671"),
+                ObjectId("6115f0b9380c479ddaa21672"),
+                ObjectId("6115f0b9380c479ddaa21673"),
+                ObjectId("6115f0b9380c479ddaa21674"),
+                ObjectId("6115f0b9380c479ddaa21675"),
+                ObjectId("6115f0b9380c479ddaa21676"),
+                ObjectId("6115f0b9380c479ddaa21677"),
+                ObjectId("6115f0b9380c479ddaa21678"),
+                ObjectId("6115f0b9380c479ddaa21679"),
+                ObjectId("6115f0b9380c479ddaa2167a"),
+                ObjectId("6115f0b9380c479ddaa2167b"),
+                ObjectId("6115f0b9380c479ddaa2167c"),
+                ObjectId("6115f0b9380c479ddaa2167d"),
+                ObjectId("6115f0b9380c479ddaa2167e"),
+                ObjectId("6115f0b9380c479ddaa2167f")
+        ]
+}
+> db.customers.find().count()
+23
+> db.customers.find().pretty()
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+        "name" : "Nick",
+        "age" : 28,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+        "name" : "Tony",
+        "age" : 20,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("610900be62894fed43c061cf"),
+        "name" : "Shawn",
+        "address" : [
+                "delhi",
+                "chennai",
+                "pune"
+        ]
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21671"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21672"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21673"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21674"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21675"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21676"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21677"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21678"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21679"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167a"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167b"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167c"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+Type "it" for more
+> it
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167d"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167e"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167f"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+> db.customers.find().toArray()
+[
+        {
+                "_id" : ObjectId("6108dcb162894fed43c061ac"),
+                "name" : "Mac",
+                "age" : 41,
+                "email" : "mac12@gmail.com",
+                "mobile" : 8787898788
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061c9"),
+                "name" : "Max",
+                "age" : 32,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061ca"),
+                "name" : "Sam",
+                "age" : 31,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061cb"),
+                "name" : "Tom",
+                "age" : 26,
+                "address" : "pune"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+                "name" : "Nick",
+                "age" : 28,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+                "name" : "Tony",
+                "age" : 20,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("610900be62894fed43c061cf"),
+                "name" : "Shawn",
+                "address" : [
+                        "delhi",
+                        "chennai",
+                        "pune"
+                ]
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21671"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21672"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21673"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21674"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21675"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21676"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21677"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21678"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21679"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167a"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167b"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167c"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167d"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167e"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167f"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        }
+]
+> db.customers.find().forEach((document) => {printjson(document)})
+{
+        "_id" : ObjectId("6108dcb162894fed43c061ac"),
+        "name" : "Mac",
+        "age" : 41,
+        "email" : "mac12@gmail.com",
+        "mobile" : 8787898788
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061c9"),
+        "name" : "Max",
+        "age" : 32,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061ca"),
+        "name" : "Sam",
+        "age" : 31,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108fee962894fed43c061cb"),
+        "name" : "Tom",
+        "age" : 26,
+        "address" : "pune"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+        "name" : "Nick",
+        "age" : 28,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+        "name" : "Tony",
+        "age" : 20,
+        "address" : "delhi"
+}
+{
+        "_id" : ObjectId("610900be62894fed43c061cf"),
+        "name" : "Shawn",
+        "address" : [
+                "delhi",
+                "chennai",
+                "pune"
+        ]
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21671"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21672"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21673"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21674"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21675"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21676"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21677"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21678"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa21679"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167a"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167b"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167c"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167d"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167e"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+{
+        "_id" : ObjectId("6115f0b9380c479ddaa2167f"),
+        "name" : "Mac",
+        "age" : 50,
+        "address" : "chennai"
+}
+> db.customers.updateOne({name : "Max"}, {$set : {"age" : 45}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.customers.updateMany({name : "Max"}, {$set : {"age" : 45}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.customers.find().toArray()
+[
+        {
+                "_id" : ObjectId("6108dcb162894fed43c061ac"),
+                "name" : "Mac",
+                "age" : 41,
+                "email" : "mac12@gmail.com",
+                "mobile" : 8787898788
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061c9"),
+                "name" : "Max",
+                "age" : 45,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061ca"),
+                "name" : "Sam",
+                "age" : 31,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108fee962894fed43c061cb"),
+                "name" : "Tom",
+                "age" : 26,
+                "address" : "pune"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061cc"),
+                "name" : "Nick",
+                "age" : 28,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061cd"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6108ffdd62894fed43c061ce"),
+                "name" : "Tony",
+                "age" : 20,
+                "address" : "delhi"
+        },
+        {
+                "_id" : ObjectId("610900be62894fed43c061cf"),
+                "name" : "Shawn",
+                "address" : [
+                        "delhi",
+                        "chennai",
+                        "pune"
+                ]
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21671"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21672"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21673"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21674"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21675"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21676"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21677"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21678"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa21679"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167a"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167b"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167c"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167d"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167e"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        },
+        {
+                "_id" : ObjectId("6115f0b9380c479ddaa2167f"),
+                "name" : "Mac",
+                "age" : 50,
+                "address" : "chennai"
+        }
+]
+> db.customers.updateMany({name : "Mac"}, {$set : {"age" : 45}})
+{ "acknowledged" : true, "matchedCount" : 17, "modifiedCount" : 17 }
+> db.products.findOne()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        }
+}
+> db.products.find({}, {p_name : 1}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12"
+}
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_name" : "One Plus Nord" }
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13"
+}
+> db.products.find({}, {p_name : 1, _id : 0}).pretty()
+{ "p_name" : "Apple Iphone 12" }
+{ "p_name" : "One Plus Nord" }
+{ "p_name" : "Apple Iphone 12 pro" }
+{ "p_name" : "Apple Macbook Pro M1" }
+{ "p_name" : "Asus Zenbook 13" }
+> db.products.find({}, {p_name : 1, p_price : 1, _id : 0}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_price" : 78000 }
+{ "p_name" : "One Plus Nord", "p_price" : 28000 }
+{ "p_name" : "Apple Iphone 12 pro", "p_price" : 98000 }
+{ "p_name" : "Apple Macbook Pro M1", "p_price" : 158000 }
+{ "p_name" : "Asus Zenbook 13", "p_price" : 88000 }
+> db.products.updateMany({}, {$set : {super_category : "Electronics", "products_available" : 10}}
+... )
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : "Apple"}).p_color
+> db.products.findOne({p_brand : "Apple"}).p_color
+[ "gold", "silver", "gray", "black" ]
+> db.products.findOne({p_brand : "Apple"}).p_color[0]
+gold
+> db.products.find({"p_description.ram" : 8}).pretty()
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : "Apple"}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$eq : "Apple"}}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$eq : "apple"}}).pretty()
+> db.products.find({p_brand : {$ne : "Apple"}}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_price : {$gt : 80000}}).pretty()
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_price : {$gt : 100000}}).pretty()
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_price : {$lt : 30000}}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find("p_description.ram" : {$gt : 8}).pretty()
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:37
+> db.products.find({"p_description.ram" : {$gt : 8}}).pretty()
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.findOne({p_brand : "Apple"}).p_color[0]
+gold
+> db.products.find({p_color : "gold"}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_color : ["gold"]}).pretty()
+> db.products.find(p_rating : {$in : [4,5]}).pretty()
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:26
+> db.products.find(p_rating : {$in : [4,5]}}).pretty()
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:26
+> db.products.find({p_rating : {$in : [4,5]}}).pretty()
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$in : ["Apple", "Samsung"]}}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$in : ["One Plus", "Samsung"]}}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$nin : ["One Plus", "Samsung"]}}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_brand : {$nin : "One Plus"}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "$nin needs an array",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.products.find({p_rating : {$lt : 4.5}}).pretty()
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$or : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}]).pretty()
+... )
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:81
+> db.products.find({$or : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}]}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$or : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"category" : {$eq : "Mobile"}}]}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$or : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$nor : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).pretty()
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$nor : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).count()
+1
+> db.products.find({$or : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).count()
+4
+> db.products.find().count()
+5
+> db.products.find({$and : [{"p_rating" : {$gt : 4.5}}, {"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).count()
+0
+> db.products.find({$and : [{"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).count()
+1
+> db.products.find({$and : [{"p_price" : {$lt : 30000}}, {"p_category" : {$eq : "Mobile"}}]}).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$and : [{"p_category" : {$eq : "Mobile"}}, {"p_color" : "gold"}]}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$and : [{"p_category" : {$eq : "Mobile"}}, {"p_color" : "gold"}, {"p_description.memory" : {$gt : 64}}]}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$and : [{"p_category" : {$eq : "Mobile"}}, {"p_color" : "gold"}, {"p_description.ram" : {$gt : 8}}]}).pretty()
+> db.products.find({$and : [{"p_category" : {$eq : "Mobile"}}, {"p_color" : "gold"}, {"p_description.ram" : {$gt : 6}}]}).pretty()
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({$not : [{"p_category" : {$eq : "Mobile"}}, {"p_color" : "gold"}, {"p_description.ram" : {$gt : 6}}]}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $not",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.products.find({p_rating : {$not : {$gt : 4.5}}}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> show collections
+customers
+products
+testCollection
+> db.users.insertMany([{name : "John", age : 40, "hobbies" : ["cricket", "badminton"]}, {name : "Shawn", age : 25, hobbies : ["football", "chess"]}, {"name" : "Tom", age : 30}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("611600ea380c479ddaa21680"),
+                ObjectId("611600ea380c479ddaa21681"),
+                ObjectId("611600ea380c479ddaa21682")
+        ]
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+> db.users.insertOne({name : "Max", age : "46"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61160119380c479ddaa21683")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+> db.users.find({age : {$exists : true}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+> db.users.find({hobbies : {$exists : true}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+> db.users.find({age : {$exists : true, $gt:30}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+> db.users.insertOne({name : "Ana", hobbies : ["badminton", "chesss"], age : null})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61160234380c479ddaa21684")
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+{
+        "_id" : ObjectId("61160234380c479ddaa21684"),
+        "name" : "Ana",
+        "hobbies" : [
+                "badminton",
+                "chesss"
+        ],
+        "age" : null
+}
+> db.users.find({age : {$exists : true}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+{
+        "_id" : ObjectId("61160234380c479ddaa21684"),
+        "name" : "Ana",
+        "hobbies" : [
+                "badminton",
+                "chesss"
+        ],
+        "age" : null
+}
+> db.users.find({age : {$exists : false}}).pretty()
+> db.users.find({age : {$exists : true, $ne : null}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+> db.users.find({age : {$type : number}}).pretty()
+uncaught exception: ReferenceError: number is not defined :
+@(shell):1:23
+> db.users.find({age : {$type : "number"}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+> db.users.find({age : {$type : "double"}}).pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("611600ea380c479ddaa21680"),
+        "name" : "John",
+        "age" : 40,
+        "hobbies" : [
+                "cricket",
+                "badminton"
+        ]
+}
+{
+        "_id" : ObjectId("611600ea380c479ddaa21681"),
+        "name" : "Shawn",
+        "age" : 25,
+        "hobbies" : [
+                "football",
+                "chess"
+        ]
+}
+{ "_id" : ObjectId("611600ea380c479ddaa21682"), "name" : "Tom", "age" : 30 }
+{
+        "_id" : ObjectId("61160119380c479ddaa21683"),
+        "name" : "Max",
+        "age" : "46"
+}
+{
+        "_id" : ObjectId("61160234380c479ddaa21684"),
+        "name" : "Ana",
+        "hobbies" : [
+                "badminton",
+                "chesss"
+        ],
+        "age" : null
+}
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_name : "Iphone"}).pretty()
+> db.products.find({p_name : {$regex : /Iphone/}}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.sales.insertMany([{target : 100, sale : 80}, {target : 210, sale : 223}, {target : 150, sale : 70}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("611605d3380c479ddaa21685"),
+                ObjectId("611605d3380c479ddaa21686"),
+                ObjectId("611605d3380c479ddaa21687")
+        ]
+}
+> db.sales.find().pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21685"),
+        "target" : 100,
+        "sale" : 80
+}
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+{
+        "_id" : ObjectId("611605d3380c479ddaa21687"),
+        "target" : 150,
+        "sale" : 70
+}
+> db.sales.find({$expr : {$gt : ["sale", "target"]}}).pretty()
+> db.sales.find({$expr : {$gt : ["$sale", "$target"]}}).pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+> db.sales.find({$expr : {$gt : [{$cond : {if : {$gt : ["$sale" : 100]}, then : {$subtract : ["$sale", 10]}, else : "$sale"}}, "$target"]}}).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.sales.find({$expr : {$gt : [{$cond : {if : {$gt : ["$sale", 100]}, then : {$subtract : ["$sale", 10]}, else : "$sale"}}, "$target"]}}).pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+> db.sales.find({$expr : {$gt : [{$cond : {if : {$gt : ["$sale", 100]}, then : {$subtract : ["$sale", 30]}, else : "$sale"}}, "$target"]}}).pretty()
+> db.sales.find({$expr : {$gt : ["$sale", "$target"]}}).pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+> db.sales.insertOne({target : 160, sale : 200})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6116082b380c479ddaa21688")
+}
+> db.sales.find({$expr : {$gt : [{$cond : {if : {$gt : ["$sale", 100]}, then : {$subtract : ["$sale", 30]}, else : "$sale"}}, "$target"]}}).pretty()
+{
+        "_id" : ObjectId("6116082b380c479ddaa21688"),
+        "target" : 160,
+        "sale" : 200
+}
+> db.sales.find().pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21685"),
+        "target" : 100,
+        "sale" : 80
+}
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+{
+        "_id" : ObjectId("611605d3380c479ddaa21687"),
+        "target" : 150,
+        "sale" : 70
+}
+{
+        "_id" : ObjectId("6116082b380c479ddaa21688"),
+        "target" : 160,
+        "sale" : 200
+}
+> db.sales.find({$expr : {$gt : ["$sale", "$target"]}}).pretty()
+{
+        "_id" : ObjectId("611605d3380c479ddaa21686"),
+        "target" : 210,
+        "sale" : 223
+}
+{
+        "_id" : ObjectId("6116082b380c479ddaa21688"),
+        "target" : 160,
+        "sale" : 200
+}
+> db.sales.find({$expr : {$gt : [{$cond : {if : {$gt : ["$sale", 100]}, then : {$subtract : ["$sale", 30]}, else : "$sale"}}, "$target"]}}).pretty()
+{
+        "_id" : ObjectId("6116082b380c479ddaa21688"),
+        "target" : 160,
+        "sale" : 200
+}
+
+
