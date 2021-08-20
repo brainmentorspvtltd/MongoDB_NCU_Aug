@@ -1,0 +1,76 @@
+Users
+{
+    id : 101
+    name : "Ram"
+    age : 30
+    interest : ["cricket", "football", "Web Development"]
+},
+{
+    id : 102
+    name : "Shyam"
+    age : 31
+    interest : ["cricket", "football"]
+}
+
+Questions
+{
+   q_id : 101
+   ques : {
+	user_id : 101
+	text : "Who is captain of Indian Cricket Team ?"
+	interest : ["cricket", "sports"]
+   }
+}
+{
+   q_id : 102
+   ques : {
+	user_id : 101
+	text : "Who is captain of Indian Football Team ?"
+	interest : ["Football", "sports"]
+   }
+}
+
+
+Answers 
+{
+    a_id : 1001
+    ans : [ {
+	   q_id : 101
+	   u_id : 102
+	   text : "Dhoni"
+	   comments : ["No its kohli", "You know nothing"],
+	   likes : 5
+       },
+	{
+	   q_id : 101
+	   u_id : 103
+	   text : "Kohli"
+	   comments : ["GOAT", "Yes you are right"],
+	   likes : 15
+       }
+    ]
+}
+
+{
+    a_id : 1001
+    ans : [ {
+	   q_id : 102
+	   u_id : 102
+	   text : "Dhoni"
+	   comments : ["No its kohli", "You know nothing"],
+	   likes : 5
+       },
+	{
+	   q_id : 101
+	   u_id : 103
+	   text : "Kohli"
+	   comments : ["GOAT", "Yes you are right"],
+	   likes : 15
+       }
+    ]
+}
+
+
+
+
+
