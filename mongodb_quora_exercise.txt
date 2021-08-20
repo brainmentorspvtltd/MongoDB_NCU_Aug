@@ -74,3 +74,155 @@ Answers
 
 
 
+
+> db.products.aggregate([{$group : {_id : "$p_brand", total : {$sum : "$p_price"}}}])
+{ "_id" : "Apple", "total" : 334000 }
+{ "_id" : "Asus", "total" : 88000 }
+{ "_id" : "One Plus", "total" : 28000 }
+> db.products.aggregate([{$group : {_id : "$p_brand", total : {$sum : "$product_available"}}}])
+{ "_id" : "Apple", "total" : 0 }
+{ "_id" : "Asus", "total" : 0 }
+{ "_id" : "One Plus", "total" : 0 }
+> db.products.aggregate([{$group : {_id : "$p_brand", total : {$sum : "$products_available"}}}])
+{ "_id" : "Apple", "total" : 30 }
+{ "_id" : "Asus", "total" : 10 }
+{ "_id" : "One Plus", "total" : 10 }
+> db.products.find({}, {p_name, p_price, _id:0}).sort()
+uncaught exception: ReferenceError: p_name is not defined :
+@(shell):1:23
+> db.products.find({}, {p_name:1, p_price:1, _id:0}).sort()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Failed to parse: sort: undefined. 'sort' field must be of BSON type object.",
+        "code" : 9,
+        "codeName" : "FailedToParse"
+}
+> db.products.find({}, {p_name:1, p_price:1, _id:0}).sort({p_price : 1}).pretty()
+{ "p_name" : "One Plus Nord", "p_price" : 28000 }
+{ "p_name" : "Apple Iphone 12", "p_price" : 78000 }
+{ "p_name" : "Asus Zenbook 13", "p_price" : 88000 }
+{ "p_name" : "Apple Iphone 12 pro", "p_price" : 98000 }
+{ "p_name" : "Apple Macbook Pro M1", "p_price" : 158000 }
+> db.products.find({}, {p_name:1, p_price:1, _id:0}).sort({p_price : -1}).pretty()
+{ "p_name" : "Apple Macbook Pro M1", "p_price" : 158000 }
+{ "p_name" : "Apple Iphone 12 pro", "p_price" : 98000 }
+{ "p_name" : "Asus Zenbook 13", "p_price" : 88000 }
+{ "p_name" : "Apple Iphone 12", "p_price" : 78000 }
+{ "p_name" : "One Plus Nord", "p_price" : 28000 }
+> db.products.aggregate([{$sort : {p_price : 1}}])
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_name" : "One Plus Nord", "p_category" : "Mobile", "p_brand" : "One Plus", "p_price" : 28000, "p_color" : [ "silver", "blue", "black" ], "p_rating" : 4.5, "p_description" : { "memory" : 64, "ram" : 6, "front_camera" : 18, "rear_camera" : 50, "screen_size" : 14.4 }, "products_available" : 10, "super_category" : "Electronics" }
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_name" : "Apple Iphone 12", "p_category" : "Mobile", "p_brand" : "Apple", "p_price" : 78000, "p_color" : [ "gold", "silver", "gray", "black" ], "p_rating" : 4.5, "p_description" : { "memory" : 128, "ram" : 6, "front_camera" : 12, "rear_camera" : 64, "screen_size" : 15.49 }, "products_available" : 10, "super_category" : "Electronics" }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670"), "p_name" : "Asus Zenbook 13", "p_category" : "Laptop", "p_brand" : "Asus", "p_price" : 88000, "p_color" : [ "gray", "silver", "blue" ], "p_rating" : 4.3, "p_description" : { "memory" : 512, "ram" : 16, "screen_size" : 33.78, "processor" : "Intel Core i7" }, "products_available" : 10, "super_category" : "Electronics" }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_name" : "Apple Iphone 12 pro", "p_category" : "Mobile", "p_brand" : "Apple", "p_price" : 98000, "p_color" : [ "gold", "silver", "black" ], "p_rating" : 4, "p_description" : { "memory" : 128, "ram" : 8, "front_camera" : 24, "rear_camera" : 108, "screen_size" : 15.49 }, "products_available" : 10, "super_category" : "Electronics" }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f"), "p_name" : "Apple Macbook Pro M1", "p_category" : "Laptop", "p_brand" : "Apple", "p_price" : 158000, "p_color" : [ "gray", "silver" ], "p_rating" : 4.8, "p_description" : { "memory" : 256, "ram" : 8, "screen_size" : 33.78, "processor" : "Mac M1" }, "products_available" : 10, "super_category" : "Electronics" }
+> db.products.aggregate([{$sort : {p_price : 1}}]).pretty()
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Asus",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+>
+
