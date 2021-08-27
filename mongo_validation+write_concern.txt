@@ -1,0 +1,29 @@
+Schema Validations
+dbpath
+logpath
+config file
+ordered inserts
+Write Concern
+import data
+
+mongoimport "F:\\NCU_MongoDB\\summary.json" -d covid_db -c summary --jsonArray --drop
+
+mongoimport "F:\\NCU_MongoDB\\summary.json" -d covid_db -c summary --drop
+
+
+Array Projection
+
+db.employees.insertMany([{_id : "emp_103", name : "Sam"}, {_id : "emp_102", name : "Tom"}, {_id : "emp_104", name : "Shawn"}], {ordered : false})
+
+db.employees.insertOne({_id : "emp_105", name : "Max"}, {writeConcern : {w : 0}})
+
+db.employees.insertOne({_id : "emp_105", name : "Max"}, {writeConcern : {w : 1}})
+
+
+
+
+
+
+
+
+
