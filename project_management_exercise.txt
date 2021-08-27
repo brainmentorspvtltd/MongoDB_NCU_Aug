@@ -1,0 +1,66 @@
+QuoraDB
+MoviesDB
+ProjectManagement / TaskManagement
+
+employees
+ - e_id
+ - e_name
+
+employees_details
+ - e_id
+ - e_dept
+ - e_salary
+ - e_phone
+
+projects
+ - p_id
+ - p_date
+ - p_name
+
+project_description
+  - p_id
+  - description
+  - client_id
+  - project_manager_id
+
+project_managers
+ - manager_id
+ - manager_dept
+ - manager_name
+
+task
+ - p_id
+ - e_id
+ - project_manager_id
+ - p_start_date
+ - p_due_date
+
+bugs
+ - p_id
+ - e_id
+ - tester_id
+ - bug_count
+ - bug_date
+ - bug_status
+
+1. create collection projects  (p_id, p_name, date, desc)
+2. create collection employees (e_id, e_name, dept, salary)
+3. create collection task      (t_id, p_id, e_id, start_date)
+4. create collection assign
+   {
+	t_id : ...
+	progress : {
+		e_id :  " "
+		status : cancelled/in_progress/completed/delivered
+		bug_count : " "
+		bugs_list : [
+			"bug_1", bug_2", "bug_3"
+		]
+	}
+   }
+
+
+
+
+
+
