@@ -1,0 +1,1767 @@
+Skipping Results
+Projection in Array
+
+Pagination
+
+
+> use covid_db
+switched to db covid_db
+> show collections
+summary
+totalCases
+> db.summary.find().count()
+192
+> db.summary.find()
+{ "_id" : ObjectId("612883d411f6aa93436c003c"), "ID" : "f557f3b8-a921-4022-89a2-77d48ef8ceab", "Country" : "Afghanistan", "CountryCode" : "AF", "Slug" : "afghanistan", "NewConfirmed" : 100, "TotalConfirmed" : 152822, "NewDeaths" : 3, "TotalDeaths" : 7093, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c003d"), "ID" : "36b64ca7-6d0b-4170-bdca-7769dd1cc04a", "Country" : "Algeria", "CountryCode" : "DZ", "Slug" : "algeria", "NewConfirmed" : 0, "TotalConfirmed" : 193171, "NewDeaths" : 0, "TotalDeaths" : 5096, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c003e"), "ID" : "798ee77d-7c24-4a15-92a4-485c628e981b", "Country" : "Angola", "CountryCode" : "AO", "Slug" : "angola", "NewConfirmed" : 187, "TotalConfirmed" : 46726, "NewDeaths" : 6, "TotalDeaths" : 1182, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c003f"), "ID" : "c200ef91-4310-4e5f-b9c5-f04e8ed21f81", "Country" : "Antigua and Barbuda", "CountryCode" : "AG", "Slug" : "antigua-and-barbuda", "NewConfirmed" : 0, "TotalConfirmed" : 1598, "NewDeaths" : 0, "TotalDeaths" : 43, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0040"), "ID" : "30ea36b2-fd2c-499c-9ef3-4576d989cc8c", "Country" : "Argentina", "CountryCode" : "AR", "Slug" : "argentina", "NewConfirmed" : 6847, "TotalConfirmed" : 5161926, "NewDeaths" : 151, "TotalDeaths" : 111117, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0041"), "ID" : "d4a0e271-991a-46e9-bb1f-c0cc2b4e6a57", "Country" : "Armenia", "CountryCode" : "AM", "Slug" : "armenia", "NewConfirmed" : 683, "TotalConfirmed" : 239739, "NewDeaths" : 7, "TotalDeaths" : 4785, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0042"), "ID" : "26ba493b-d9c1-41d2-bc95-98421814b536", "Country" : "Australia", "CountryCode" : "AU", "Slug" : "australia", "NewConfirmed" : 1115, "TotalConfirmed" : 47840, "NewDeaths" : 3, "TotalDeaths" : 989, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0043"), "ID" : "5a476399-e8c0-4acb-8875-9ecc588c9eae", "Country" : "Albania", "CountryCode" : "AL", "Slug" : "albania", "NewConfirmed" : 888, "TotalConfirmed" : 142253, "NewDeaths" : 3, "TotalDeaths" : 2486, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0044"), "ID" : "3fca6132-12d6-4cbb-9223-16d9247ed910", "Country" : "Andorra", "CountryCode" : "AD", "Slug" : "andorra", "NewConfirmed" : 2, "TotalConfirmed" : 15016, "NewDeaths" : 0, "TotalDeaths" : 130, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0045"), "ID" : "7793b91d-b40b-45b3-82d8-998b35b29e4d", "Country" : "Austria", "CountryCode" : "AT", "Slug" : "austria", "NewConfirmed" : 1438, "TotalConfirmed" : 681617, "NewDeaths" : 2, "TotalDeaths" : 10772, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0046"), "ID" : "bec01897-d7d5-40b9-be99-5c3b92c9e924", "Country" : "Bangladesh", "CountryCode" : "BD", "Slug" : "bangladesh", "NewConfirmed" : 4698, "TotalConfirmed" : 1482628, "NewDeaths" : 102, "TotalDeaths" : 25729, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0047"), "ID" : "0c13bc28-fa1f-41ab-bd56-6f14ac0c61d2", "Country" : "Bahrain", "CountryCode" : "BH", "Slug" : "bahrain", "NewConfirmed" : 109, "TotalConfirmed" : 272042, "NewDeaths" : 0, "TotalDeaths" : 1388, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0048"), "ID" : "17d2430f-cb6d-4f24-9d50-c082b9225a9d", "Country" : "Barbados", "CountryCode" : "BB", "Slug" : "barbados", "NewConfirmed" : 0, "TotalConfirmed" : 4720, "NewDeaths" : 0, "TotalDeaths" : 48, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c0049"), "ID" : "4916c19d-0f0c-4e03-91ec-976249682cf1", "Country" : "Belarus", "CountryCode" : "BY", "Slug" : "belarus", "NewConfirmed" : 1551, "TotalConfirmed" : 474403, "NewDeaths" : 11, "TotalDeaths" : 3723, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004a"), "ID" : "49e581b9-cf2e-471a-a28a-6b1eb81bb297", "Country" : "Belgium", "CountryCode" : "BE", "Slug" : "belgium", "NewConfirmed" : 2895, "TotalConfirmed" : 1173108, "NewDeaths" : 6, "TotalDeaths" : 25348, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004b"), "ID" : "576c70a2-130d-4bde-9ade-4572793f38e5", "Country" : "Belize", "CountryCode" : "BZ", "Slug" : "belize", "NewConfirmed" : 0, "TotalConfirmed" : 15793, "NewDeaths" : 0, "TotalDeaths" : 356, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004c"), "ID" : "ca5a4580-7b9d-4a4e-8a02-ac65789ca876", "Country" : "Benin", "CountryCode" : "BJ", "Slug" : "benin", "NewConfirmed" : 0, "TotalConfirmed" : 12492, "NewDeaths" : 0, "TotalDeaths" : 127, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004d"), "ID" : "b58d4e71-8105-4276-b8a2-1b35481ee59c", "Country" : "Azerbaijan", "CountryCode" : "AZ", "Slug" : "azerbaijan", "NewConfirmed" : 3714, "TotalConfirmed" : 405542, "NewDeaths" : 31, "TotalDeaths" : 5434, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004e"), "ID" : "209b412e-2593-452f-8e35-4b36b1d7b40c", "Country" : "Bolivia", "CountryCode" : "BO", "Slug" : "bolivia", "NewConfirmed" : 0, "TotalConfirmed" : 488403, "NewDeaths" : 0, "TotalDeaths" : 18350, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+{ "_id" : ObjectId("612883d411f6aa93436c004f"), "ID" : "58989b9c-a34c-497c-b505-efb05394e6ab", "Country" : "Bahamas", "CountryCode" : "BS", "Slug" : "bahamas", "NewConfirmed" : 102, "TotalConfirmed" : 17717, "NewDeaths" : 0, "TotalDeaths" : 343, "NewRecovered" : 0, "TotalRecovered" : 0, "Date" : "2021-08-27T02:37:34.029Z", "Premium" : {  } }
+Type "it" for more
+> db.summary.find().pretty()
+{
+        "_id" : ObjectId("612883d411f6aa93436c003c"),
+        "ID" : "f557f3b8-a921-4022-89a2-77d48ef8ceab",
+        "Country" : "Afghanistan",
+        "CountryCode" : "AF",
+        "Slug" : "afghanistan",
+        "NewConfirmed" : 100,
+        "TotalConfirmed" : 152822,
+        "NewDeaths" : 3,
+        "TotalDeaths" : 7093,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c003d"),
+        "ID" : "36b64ca7-6d0b-4170-bdca-7769dd1cc04a",
+        "Country" : "Algeria",
+        "CountryCode" : "DZ",
+        "Slug" : "algeria",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 193171,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 5096,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c003e"),
+        "ID" : "798ee77d-7c24-4a15-92a4-485c628e981b",
+        "Country" : "Angola",
+        "CountryCode" : "AO",
+        "Slug" : "angola",
+        "NewConfirmed" : 187,
+        "TotalConfirmed" : 46726,
+        "NewDeaths" : 6,
+        "TotalDeaths" : 1182,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c003f"),
+        "ID" : "c200ef91-4310-4e5f-b9c5-f04e8ed21f81",
+        "Country" : "Antigua and Barbuda",
+        "CountryCode" : "AG",
+        "Slug" : "antigua-and-barbuda",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 1598,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 43,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0040"),
+        "ID" : "30ea36b2-fd2c-499c-9ef3-4576d989cc8c",
+        "Country" : "Argentina",
+        "CountryCode" : "AR",
+        "Slug" : "argentina",
+        "NewConfirmed" : 6847,
+        "TotalConfirmed" : 5161926,
+        "NewDeaths" : 151,
+        "TotalDeaths" : 111117,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0041"),
+        "ID" : "d4a0e271-991a-46e9-bb1f-c0cc2b4e6a57",
+        "Country" : "Armenia",
+        "CountryCode" : "AM",
+        "Slug" : "armenia",
+        "NewConfirmed" : 683,
+        "TotalConfirmed" : 239739,
+        "NewDeaths" : 7,
+        "TotalDeaths" : 4785,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0042"),
+        "ID" : "26ba493b-d9c1-41d2-bc95-98421814b536",
+        "Country" : "Australia",
+        "CountryCode" : "AU",
+        "Slug" : "australia",
+        "NewConfirmed" : 1115,
+        "TotalConfirmed" : 47840,
+        "NewDeaths" : 3,
+        "TotalDeaths" : 989,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0043"),
+        "ID" : "5a476399-e8c0-4acb-8875-9ecc588c9eae",
+        "Country" : "Albania",
+        "CountryCode" : "AL",
+        "Slug" : "albania",
+        "NewConfirmed" : 888,
+        "TotalConfirmed" : 142253,
+        "NewDeaths" : 3,
+        "TotalDeaths" : 2486,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0044"),
+        "ID" : "3fca6132-12d6-4cbb-9223-16d9247ed910",
+        "Country" : "Andorra",
+        "CountryCode" : "AD",
+        "Slug" : "andorra",
+        "NewConfirmed" : 2,
+        "TotalConfirmed" : 15016,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 130,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0045"),
+        "ID" : "7793b91d-b40b-45b3-82d8-998b35b29e4d",
+        "Country" : "Austria",
+        "CountryCode" : "AT",
+        "Slug" : "austria",
+        "NewConfirmed" : 1438,
+        "TotalConfirmed" : 681617,
+        "NewDeaths" : 2,
+        "TotalDeaths" : 10772,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0046"),
+        "ID" : "bec01897-d7d5-40b9-be99-5c3b92c9e924",
+        "Country" : "Bangladesh",
+        "CountryCode" : "BD",
+        "Slug" : "bangladesh",
+        "NewConfirmed" : 4698,
+        "TotalConfirmed" : 1482628,
+        "NewDeaths" : 102,
+        "TotalDeaths" : 25729,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0047"),
+        "ID" : "0c13bc28-fa1f-41ab-bd56-6f14ac0c61d2",
+        "Country" : "Bahrain",
+        "CountryCode" : "BH",
+        "Slug" : "bahrain",
+        "NewConfirmed" : 109,
+        "TotalConfirmed" : 272042,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 1388,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0048"),
+        "ID" : "17d2430f-cb6d-4f24-9d50-c082b9225a9d",
+        "Country" : "Barbados",
+        "CountryCode" : "BB",
+        "Slug" : "barbados",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 4720,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 48,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0049"),
+        "ID" : "4916c19d-0f0c-4e03-91ec-976249682cf1",
+        "Country" : "Belarus",
+        "CountryCode" : "BY",
+        "Slug" : "belarus",
+        "NewConfirmed" : 1551,
+        "TotalConfirmed" : 474403,
+        "NewDeaths" : 11,
+        "TotalDeaths" : 3723,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004a"),
+        "ID" : "49e581b9-cf2e-471a-a28a-6b1eb81bb297",
+        "Country" : "Belgium",
+        "CountryCode" : "BE",
+        "Slug" : "belgium",
+        "NewConfirmed" : 2895,
+        "TotalConfirmed" : 1173108,
+        "NewDeaths" : 6,
+        "TotalDeaths" : 25348,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004b"),
+        "ID" : "576c70a2-130d-4bde-9ade-4572793f38e5",
+        "Country" : "Belize",
+        "CountryCode" : "BZ",
+        "Slug" : "belize",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 15793,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 356,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004c"),
+        "ID" : "ca5a4580-7b9d-4a4e-8a02-ac65789ca876",
+        "Country" : "Benin",
+        "CountryCode" : "BJ",
+        "Slug" : "benin",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 12492,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 127,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004d"),
+        "ID" : "b58d4e71-8105-4276-b8a2-1b35481ee59c",
+        "Country" : "Azerbaijan",
+        "CountryCode" : "AZ",
+        "Slug" : "azerbaijan",
+        "NewConfirmed" : 3714,
+        "TotalConfirmed" : 405542,
+        "NewDeaths" : 31,
+        "TotalDeaths" : 5434,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004e"),
+        "ID" : "209b412e-2593-452f-8e35-4b36b1d7b40c",
+        "Country" : "Bolivia",
+        "CountryCode" : "BO",
+        "Slug" : "bolivia",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 488403,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 18350,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c004f"),
+        "ID" : "58989b9c-a34c-497c-b505-efb05394e6ab",
+        "Country" : "Bahamas",
+        "CountryCode" : "BS",
+        "Slug" : "bahamas",
+        "NewConfirmed" : 102,
+        "TotalConfirmed" : 17717,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 343,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+Type "it" for more
+> it
+{
+        "_id" : ObjectId("612883d411f6aa93436c0050"),
+        "ID" : "a4b7dbfb-f6af-4ce4-b38f-c61cb23cd266",
+        "Country" : "Bhutan",
+        "CountryCode" : "BT",
+        "Slug" : "bhutan",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 2591,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 3,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0051"),
+        "ID" : "ebe18b5c-9e45-4f26-8a2f-537e5a30bbff",
+        "Country" : "Bosnia and Herzegovina",
+        "CountryCode" : "BA",
+        "Slug" : "bosnia-and-herzegovina",
+        "NewConfirmed" : 630,
+        "TotalConfirmed" : 211689,
+        "NewDeaths" : 12,
+        "TotalDeaths" : 9770,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0052"),
+        "ID" : "01a39b2a-b121-4bb9-ae1d-fa37c48b9ffc",
+        "Country" : "Botswana",
+        "CountryCode" : "BW",
+        "Slug" : "botswana",
+        "NewConfirmed" : 2951,
+        "TotalConfirmed" : 153793,
+        "NewDeaths" : 42,
+        "TotalDeaths" : 2213,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0053"),
+        "ID" : "6aed9172-9d96-4a9d-a4b1-028a87244971",
+        "Country" : "Brazil",
+        "CountryCode" : "BR",
+        "Slug" : "brazil",
+        "NewConfirmed" : 30671,
+        "TotalConfirmed" : 20645537,
+        "NewDeaths" : 903,
+        "TotalDeaths" : 576645,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0054"),
+        "ID" : "9e95ba2a-d4ed-4f1c-bba7-fecb73407ae3",
+        "Country" : "Brunei Darussalam",
+        "CountryCode" : "BN",
+        "Slug" : "brunei",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 2159,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 6,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0055"),
+        "ID" : "70e87fc4-7427-4ba6-879c-6d3922f7d00d",
+        "Country" : "Bulgaria",
+        "CountryCode" : "BG",
+        "Slug" : "bulgaria",
+        "NewConfirmed" : 1733,
+        "TotalConfirmed" : 448431,
+        "NewDeaths" : 34,
+        "TotalDeaths" : 18647,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0056"),
+        "ID" : "63879af9-17b3-462a-99a9-b3f374c9d852",
+        "Country" : "Cameroon",
+        "CountryCode" : "CM",
+        "Slug" : "cameroon",
+        "NewConfirmed" : 971,
+        "TotalConfirmed" : 83425,
+        "NewDeaths" : 12,
+        "TotalDeaths" : 1350,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0057"),
+        "ID" : "be9181cb-4481-428a-b812-879579945ca4",
+        "Country" : "Burundi",
+        "CountryCode" : "BI",
+        "Slug" : "burundi",
+        "NewConfirmed" : 218,
+        "TotalConfirmed" : 11599,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 38,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0058"),
+        "ID" : "ca9b4d1d-90ae-450b-85d8-ccffb79b0931",
+        "Country" : "Canada",
+        "CountryCode" : "CA",
+        "Slug" : "canada",
+        "NewConfirmed" : 2461,
+        "TotalConfirmed" : 1240497,
+        "NewDeaths" : 69,
+        "TotalDeaths" : 24562,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0059"),
+        "ID" : "e7eef090-cd8d-4626-950b-e9382bcd5dea",
+        "Country" : "Cape Verde",
+        "CountryCode" : "CV",
+        "Slug" : "cape-verde",
+        "NewConfirmed" : 73,
+        "TotalConfirmed" : 34992,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 307,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005a"),
+        "ID" : "997204f7-0320-4190-ab76-9f34501164d2",
+        "Country" : "Central African Republic",
+        "CountryCode" : "CF",
+        "Slug" : "central-african-republic",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 11270,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 99,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005b"),
+        "ID" : "ce7d9ead-eb1a-4f11-831e-7738c6b565d8",
+        "Country" : "Chad",
+        "CountryCode" : "TD",
+        "Slug" : "chad",
+        "NewConfirmed" : 2,
+        "TotalConfirmed" : 4989,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 174,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005c"),
+        "ID" : "72a42cf4-3e1a-4dfd-90a9-192da469bb74",
+        "Country" : "Burkina Faso",
+        "CountryCode" : "BF",
+        "Slug" : "burkina-faso",
+        "NewConfirmed" : 12,
+        "TotalConfirmed" : 13749,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 171,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005d"),
+        "ID" : "fc1a2b81-4ec6-4d22-bfc6-b7fadcf2dbd7",
+        "Country" : "Chile",
+        "CountryCode" : "CL",
+        "Slug" : "chile",
+        "NewConfirmed" : 399,
+        "TotalConfirmed" : 1635173,
+        "NewDeaths" : 17,
+        "TotalDeaths" : 36718,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005e"),
+        "ID" : "75c77a64-f745-48ef-89d5-c4bfe317c23c",
+        "Country" : "Cambodia",
+        "CountryCode" : "KH",
+        "Slug" : "cambodia",
+        "NewConfirmed" : 423,
+        "TotalConfirmed" : 90958,
+        "NewDeaths" : 6,
+        "TotalDeaths" : 1841,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c005f"),
+        "ID" : "5b0af3d3-9276-41ab-955c-c19e41f31fb2",
+        "Country" : "Congo (Brazzaville)",
+        "CountryCode" : "CG",
+        "Slug" : "congo-brazzaville",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 13493,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 179,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0060"),
+        "ID" : "d7e9c72f-1e3c-49ab-891b-0006b6ebbc09",
+        "Country" : "Colombia",
+        "CountryCode" : "CO",
+        "Slug" : "colombia",
+        "NewConfirmed" : 2448,
+        "TotalConfirmed" : 4897150,
+        "NewDeaths" : 86,
+        "TotalDeaths" : 124474,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0061"),
+        "ID" : "b3f4d242-4ad4-4bd9-8ec6-1185b78ca7ca",
+        "Country" : "Congo (Kinshasa)",
+        "CountryCode" : "CD",
+        "Slug" : "congo-kinshasa",
+        "NewConfirmed" : 89,
+        "TotalConfirmed" : 54226,
+        "NewDeaths" : 2,
+        "TotalDeaths" : 1057,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0062"),
+        "ID" : "ffc500bd-c4d5-4335-b852-708694379914",
+        "Country" : "Costa Rica",
+        "CountryCode" : "CR",
+        "Slug" : "costa-rica",
+        "NewConfirmed" : 0,
+        "TotalConfirmed" : 450291,
+        "NewDeaths" : 0,
+        "TotalDeaths" : 5394,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+{
+        "_id" : ObjectId("612883d411f6aa93436c0063"),
+        "ID" : "7f01798c-c2a7-43e9-987e-7a9378d11abb",
+        "Country" : "Croatia",
+        "CountryCode" : "HR",
+        "Slug" : "croatia",
+        "NewConfirmed" : 638,
+        "TotalConfirmed" : 371623,
+        "NewDeaths" : 6,
+        "TotalDeaths" : 8316,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+Type "it" for more
+> db.summary.find().next()
+{
+        "_id" : ObjectId("612883d411f6aa93436c003c"),
+        "ID" : "f557f3b8-a921-4022-89a2-77d48ef8ceab",
+        "Country" : "Afghanistan",
+        "CountryCode" : "AF",
+        "Slug" : "afghanistan",
+        "NewConfirmed" : 100,
+        "TotalConfirmed" : 152822,
+        "NewDeaths" : 3,
+        "TotalDeaths" : 7093,
+        "NewRecovered" : 0,
+        "TotalRecovered" : 0,
+        "Date" : "2021-08-27T02:37:34.029Z",
+        "Premium" : {
+
+        }
+}
+> db.summary.find().hasNext()
+true
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-1}).limit(10)
+{ "_id" : ObjectId("612883d411f6aa93436c003c"), "Country" : "Afghanistan", "TotalConfirmed" : 152822 }
+{ "_id" : ObjectId("612883d411f6aa93436c003d"), "Country" : "Algeria", "TotalConfirmed" : 193171 }
+{ "_id" : ObjectId("612883d411f6aa93436c003e"), "Country" : "Angola", "TotalConfirmed" : 46726 }
+{ "_id" : ObjectId("612883d411f6aa93436c003f"), "Country" : "Antigua and Barbuda", "TotalConfirmed" : 1598 }
+{ "_id" : ObjectId("612883d411f6aa93436c0040"), "Country" : "Argentina", "TotalConfirmed" : 5161926 }
+{ "_id" : ObjectId("612883d411f6aa93436c0041"), "Country" : "Armenia", "TotalConfirmed" : 239739 }
+{ "_id" : ObjectId("612883d411f6aa93436c0042"), "Country" : "Australia", "TotalConfirmed" : 47840 }
+{ "_id" : ObjectId("612883d411f6aa93436c0043"), "Country" : "Albania", "TotalConfirmed" : 142253 }
+{ "_id" : ObjectId("612883d411f6aa93436c0044"), "Country" : "Andorra", "TotalConfirmed" : 15016 }
+{ "_id" : ObjectId("612883d411f6aa93436c0045"), "Country" : "Austria", "TotalConfirmed" : 681617 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).limit(10)
+{ "Country" : "Afghanistan", "TotalConfirmed" : 152822 }
+{ "Country" : "Algeria", "TotalConfirmed" : 193171 }
+{ "Country" : "Angola", "TotalConfirmed" : 46726 }
+{ "Country" : "Antigua and Barbuda", "TotalConfirmed" : 1598 }
+{ "Country" : "Argentina", "TotalConfirmed" : 5161926 }
+{ "Country" : "Armenia", "TotalConfirmed" : 239739 }
+{ "Country" : "Australia", "TotalConfirmed" : 47840 }
+{ "Country" : "Albania", "TotalConfirmed" : 142253 }
+{ "Country" : "Andorra", "TotalConfirmed" : 15016 }
+{ "Country" : "Austria", "TotalConfirmed" : 681617 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).skip(10).limit(10)
+{ "Country" : "Bangladesh", "TotalConfirmed" : 1482628 }
+{ "Country" : "Bahrain", "TotalConfirmed" : 272042 }
+{ "Country" : "Barbados", "TotalConfirmed" : 4720 }
+{ "Country" : "Belarus", "TotalConfirmed" : 474403 }
+{ "Country" : "Belgium", "TotalConfirmed" : 1173108 }
+{ "Country" : "Belize", "TotalConfirmed" : 15793 }
+{ "Country" : "Benin", "TotalConfirmed" : 12492 }
+{ "Country" : "Azerbaijan", "TotalConfirmed" : 405542 }
+{ "Country" : "Bolivia", "TotalConfirmed" : 488403 }
+{ "Country" : "Bahamas", "TotalConfirmed" : 17717 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).skip(20).limit(10)
+{ "Country" : "Bhutan", "TotalConfirmed" : 2591 }
+{ "Country" : "Bosnia and Herzegovina", "TotalConfirmed" : 211689 }
+{ "Country" : "Botswana", "TotalConfirmed" : 153793 }
+{ "Country" : "Brazil", "TotalConfirmed" : 20645537 }
+{ "Country" : "Brunei Darussalam", "TotalConfirmed" : 2159 }
+{ "Country" : "Bulgaria", "TotalConfirmed" : 448431 }
+{ "Country" : "Cameroon", "TotalConfirmed" : 83425 }
+{ "Country" : "Burundi", "TotalConfirmed" : 11599 }
+{ "Country" : "Canada", "TotalConfirmed" : 1240497 }
+{ "Country" : "Cape Verde", "TotalConfirmed" : 34992 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).sort({TotalConfirmed:1}).skip(20).limit(10)
+{ "Country" : "Comoros", "TotalConfirmed" : 4055 }
+{ "Country" : "Barbados", "TotalConfirmed" : 4720 }
+{ "Country" : "Chad", "TotalConfirmed" : 4989 }
+{ "Country" : "San Marino", "TotalConfirmed" : 5261 }
+{ "Country" : "Liberia", "TotalConfirmed" : 5538 }
+{ "Country" : "Guinea-Bissau", "TotalConfirmed" : 5634 }
+{ "Country" : "Niger", "TotalConfirmed" : 5807 }
+{ "Country" : "Sierra Leone", "TotalConfirmed" : 6363 }
+{ "Country" : "Eritrea", "TotalConfirmed" : 6636 }
+{ "Country" : "Saint Lucia", "TotalConfirmed" : 7536 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).sort({TotalConfirmed:-11}).skip(20).limit(10)
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "$sort key ordering must be 1 (for ascending) or -1 (for descending)",
+        "code" : 15975,
+        "codeName" : "Location15975"
+}
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id:-0}).sort({TotalConfirmed:-1}).skip(20).limit(10)
+{ "Country" : "Philippines", "TotalConfirmed" : 1899200 }
+{ "Country" : "Iraq", "TotalConfirmed" : 1855781 }
+{ "Country" : "Czech Republic", "TotalConfirmed" : 1678331 }
+{ "Country" : "Malaysia", "TotalConfirmed" : 1640843 }
+{ "Country" : "Chile", "TotalConfirmed" : 1635173 }
+{ "Country" : "Bangladesh", "TotalConfirmed" : 1482628 }
+{ "Country" : "Japan", "TotalConfirmed" : 1369091 }
+{ "Country" : "Canada", "TotalConfirmed" : 1240497 }
+{ "Country" : "Belgium", "TotalConfirmed" : 1173108 }
+{ "Country" : "Pakistan", "TotalConfirmed" : 1140411 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id : 0}).limit(10)
+{ "Country" : "Afghanistan", "TotalConfirmed" : 152822 }
+{ "Country" : "Algeria", "TotalConfirmed" : 193171 }
+{ "Country" : "Angola", "TotalConfirmed" : 46726 }
+{ "Country" : "Antigua and Barbuda", "TotalConfirmed" : 1598 }
+{ "Country" : "Argentina", "TotalConfirmed" : 5161926 }
+{ "Country" : "Armenia", "TotalConfirmed" : 239739 }
+{ "Country" : "Australia", "TotalConfirmed" : 47840 }
+{ "Country" : "Albania", "TotalConfirmed" : 142253 }
+{ "Country" : "Andorra", "TotalConfirmed" : 15016 }
+{ "Country" : "Austria", "TotalConfirmed" : 681617 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id : 0}).skip(10).limit(10)
+{ "Country" : "Bangladesh", "TotalConfirmed" : 1482628 }
+{ "Country" : "Bahrain", "TotalConfirmed" : 272042 }
+{ "Country" : "Barbados", "TotalConfirmed" : 4720 }
+{ "Country" : "Belarus", "TotalConfirmed" : 474403 }
+{ "Country" : "Belgium", "TotalConfirmed" : 1173108 }
+{ "Country" : "Belize", "TotalConfirmed" : 15793 }
+{ "Country" : "Benin", "TotalConfirmed" : 12492 }
+{ "Country" : "Azerbaijan", "TotalConfirmed" : 405542 }
+{ "Country" : "Bolivia", "TotalConfirmed" : 488403 }
+{ "Country" : "Bahamas", "TotalConfirmed" : 17717 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id : 0}).sort({TotalConfirmed:-1}).skip(10).limit(10)
+{ "Country" : "Spain", "TotalConfirmed" : 4815205 }
+{ "Country" : "Italy", "TotalConfirmed" : 4502396 }
+{ "Country" : "Indonesia", "TotalConfirmed" : 4043736 }
+{ "Country" : "Germany", "TotalConfirmed" : 3911562 }
+{ "Country" : "Mexico", "TotalConfirmed" : 3271128 }
+{ "Country" : "Poland", "TotalConfirmed" : 2887485 }
+{ "Country" : "South Africa", "TotalConfirmed" : 2734973 }
+{ "Country" : "Ukraine", "TotalConfirmed" : 2371895 }
+{ "Country" : "Peru", "TotalConfirmed" : 2143691 }
+{ "Country" : "Netherlands", "TotalConfirmed" : 1926424 }
+> db.summary.find({}, {Country : 1, TotalConfirmed : 1, _id : 0}).skip(10).sort({TotalConfirmed:-1}).limit(10)
+{ "Country" : "Spain", "TotalConfirmed" : 4815205 }
+{ "Country" : "Italy", "TotalConfirmed" : 4502396 }
+{ "Country" : "Indonesia", "TotalConfirmed" : 4043736 }
+{ "Country" : "Germany", "TotalConfirmed" : 3911562 }
+{ "Country" : "Mexico", "TotalConfirmed" : 3271128 }
+{ "Country" : "Poland", "TotalConfirmed" : 2887485 }
+{ "Country" : "South Africa", "TotalConfirmed" : 2734973 }
+{ "Country" : "Ukraine", "TotalConfirmed" : 2371895 }
+{ "Country" : "Peru", "TotalConfirmed" : 2143691 }
+{ "Country" : "Netherlands", "TotalConfirmed" : 1926424 }
+> show dbs
+Flipkart      0.000GB
+TCS           0.000GB
+admin         0.000GB
+amazon_db     0.000GB
+config        0.000GB
+covid_db      0.000GB
+dataTypes_db  0.000GB
+emp_db        0.000GB
+local         0.000GB
+movies_db     0.000GB
+new_db        0.000GB
+shopping      0.000GB
+testDB        0.000GB
+> show movies_db;
+uncaught exception: Error: don't know how to show [movies_db] :
+shellHelper.show@src/mongo/shell/utils.js:1191:11
+shellHelper@src/mongo/shell/utils.js:819:15
+@(shellhelp2):1:1
+> use movies_db;
+switched to db movies_db
+> show collections
+movieDetails
+movies
+numbers
+top_10
+userDetails
+userPost
+userReview
+users
+> db.userPost.find().pretty()
+{
+        "_id" : ObjectId("611f426687cc4376ff1d7f88"),
+        "name" : ObjectId("611f3f3c87cc4376ff1d7f83"),
+        "posts" : [
+                {
+                        "text" : "hi",
+                        "comments" : 5,
+                        "likes" : 10
+                },
+                {
+                        "text" : "hello",
+                        "comments" : 10,
+                        "likes" : 20
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f437287cc4376ff1d7f8a"),
+        "name" : ObjectId("611f42c587cc4376ff1d7f89"),
+        "posts" : [
+                {
+                        "text" : "learning python",
+                        "comments" : 15,
+                        "likes" : 100
+                }
+        ]
+}
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f68"),
+        "name" : "Ram",
+        "email" : "ram12@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f69"),
+        "name" : "Shyam",
+        "email" : "shyam12@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f6a"),
+        "name" : "Mohit",
+        "email" : "mohit44@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f6b"),
+        "name" : "Ravi",
+        "email" : "ravi22@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f6c"),
+        "name" : "Sam",
+        "email" : "sam77@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f6d"),
+        "name" : "Amit",
+        "email" : "amit21@gmail.com"
+}
+{
+        "_id" : ObjectId("611f2e9987cc4376ff1d7f6e"),
+        "name" : "Pooja",
+        "email" : "pooja09@gmail.com"
+}
+{
+        "_id" : ObjectId("611f3e8687cc4376ff1d7f81"),
+        "username" : "pooja_01",
+        "age" : 40,
+        "details" : {
+                "post" : [
+                        "hi",
+                        "good morning"
+                ]
+        }
+}
+> db.userReviews.find().pretty()
+> db.userReview.find().pretty()
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f6f"),
+        "email" : "ram12@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f70"),
+        "email" : "shyam12@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 102,
+                        "review" : "That movie was really very awesome",
+                        "watch_count" : 2,
+                        "rating" : 8.6
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f71"),
+        "email" : "mohit44@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was not that good",
+                        "watch_count" : 1,
+                        "rating" : 6.5
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f72"),
+        "email" : "ravi22@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was awesome",
+                        "watch_count" : 2,
+                        "rating" : 7.9
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f73"),
+        "email" : "sam77@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f74"),
+        "email" : "amit21@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 106,
+                        "review" : "That movie was good",
+                        "watch_count" : 1,
+                        "rating" : 8.8
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+> show dbs
+Flipkart      0.000GB
+TCS           0.000GB
+admin         0.000GB
+amazon_db     0.000GB
+config        0.000GB
+covid_db      0.000GB
+dataTypes_db  0.000GB
+emp_db        0.000GB
+local         0.000GB
+movies_db     0.000GB
+new_db        0.000GB
+shopping      0.000GB
+testDB        0.000GB
+> use amazon_db
+switched to db amazon_db
+> show collections
+products
+top_10_movies
+users
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("611c8861918cfa19aef586a5"),
+        "name" : "Apple Iphone 12 pro",
+        "price" : 130000
+}
+> use shopping
+switched to db shopping
+> show collections
+customers
+products
+sales
+stores
+testCollection
+users
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Asus",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_color : "silver"}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Asus",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> db.products.find({p_color : "silver"}, {"p_color.$" : 1}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670"), "p_color" : [ "silver" ] }
+> db.products.find().count()
+5
+> db.products.find({p_color : "gold"}, {"p_color.$" : 1}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "gold" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "gold" ] }
+> db.products.find({p_color : "gold"}, {p_name : 1}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro"
+}
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0}).pretty()
+{ "p_name" : "Apple Iphone 12" }
+{ "p_name" : "Apple Iphone 12 pro" }
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, "p_name.$" : 1}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Path collision at p_name",
+        "code" : 31250,
+        "codeName" : "Location31250"
+}
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_color" : [ "gold" ] }
+{ "p_name" : "Apple Iphone 12 pro", "p_color" : [ "gold" ] }
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, p_color:1}).pretty()
+{
+        "p_name" : "Apple Iphone 12",
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ]
+}
+{
+        "p_name" : "Apple Iphone 12 pro",
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ]
+}
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_color" : [ "gold" ] }
+{ "p_name" : "Apple Iphone 12 pro", "p_color" : [ "gold" ] }
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, p_color : 1}).pretty()
+{
+        "p_name" : "Apple Iphone 12",
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ]
+}
+{
+        "p_name" : "Apple Iphone 12 pro",
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ]
+}
+> db.products.find({p_color : ["gold"]}, {p_name : 1, _id : 0, p_color : 1}).pretty()
+> db.products.find({p_color : "gold"}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_color" : [ "gold" ] }
+{ "p_name" : "Apple Iphone 12 pro", "p_color" : [ "gold" ] }
+> db.products.find({p_color : ["gold", "silver"]}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+> db.products.find({p_color : {$all : ["gold", "silver"]}}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_color" : [ "silver" ] }
+{ "p_name" : "Apple Iphone 12 pro", "p_color" : [ "silver" ] }
+> db.products.find({p_color : {$all : ["gold", "silver"]}}, {p_name : 1, _id : 0}).pretty()
+{ "p_name" : "Apple Iphone 12" }
+{ "p_name" : "Apple Iphone 12 pro" }
+> db.products.find({p_color : {$all : ["gold", "silver"]}}, {p_name : 1, _id : 0, p_color:1}).pretty()
+{
+        "p_name" : "Apple Iphone 12",
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ]
+}
+{
+        "p_name" : "Apple Iphone 12 pro",
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ]
+}
+> db.products.find({p_color : {$all : ["gold", "silver"]}}, {p_name : 1, _id : 0, "p_color.$" : 1}).pretty()
+{ "p_name" : "Apple Iphone 12", "p_color" : [ "silver" ] }
+{ "p_name" : "Apple Iphone 12 pro", "p_color" : [ "silver" ] }
+> db.products.find({p_color : "gold"}, {p_color : {$elemMatch : {$eq : "silver"}}}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "silver" ] }
+> db.products.find({p_color : "blue"}, {p_color : {$elemMatch : {$eq : "silver"}}}).pretty()
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670"), "p_color" : [ "silver" ] }
+> db.products.find({p_color : "black"}, {p_color : {$elemMatch : {$eq : "silver"}}}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "silver" ] }
+> db.products.find({p_color : "silver"}, {p_color : {$elemMatch : {$eq : "black"}}}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f") }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670") }
+> db.products.find().pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_name" : "Apple Iphone 12",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 78000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 6,
+                "front_camera" : 12,
+                "rear_camera" : 64,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_name" : "One Plus Nord",
+        "p_category" : "Mobile",
+        "p_brand" : "One Plus",
+        "p_price" : 28000,
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ],
+        "p_rating" : 4.5,
+        "p_description" : {
+                "memory" : 64,
+                "ram" : 6,
+                "front_camera" : 18,
+                "rear_camera" : 50,
+                "screen_size" : 14.4
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_name" : "Apple Iphone 12 pro",
+        "p_category" : "Mobile",
+        "p_brand" : "Apple",
+        "p_price" : 98000,
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ],
+        "p_rating" : 4,
+        "p_description" : {
+                "memory" : 128,
+                "ram" : 8,
+                "front_camera" : 24,
+                "rear_camera" : 108,
+                "screen_size" : 15.49
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_name" : "Apple Macbook Pro M1",
+        "p_category" : "Laptop",
+        "p_brand" : "Apple",
+        "p_price" : 158000,
+        "p_color" : [
+                "gray",
+                "silver"
+        ],
+        "p_rating" : 4.8,
+        "p_description" : {
+                "memory" : 256,
+                "ram" : 8,
+                "screen_size" : 33.78,
+                "processor" : "Mac M1"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_name" : "Asus Zenbook 13",
+        "p_category" : "Laptop",
+        "p_brand" : "Asus",
+        "p_price" : 88000,
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ],
+        "p_rating" : 4.3,
+        "p_description" : {
+                "memory" : 512,
+                "ram" : 16,
+                "screen_size" : 33.78,
+                "processor" : "Intel Core i7"
+        },
+        "products_available" : 10,
+        "super_category" : "Electronics"
+}
+> show dbs
+Flipkart      0.000GB
+TCS           0.000GB
+admin         0.000GB
+amazon_db     0.000GB
+config        0.000GB
+covid_db      0.000GB
+dataTypes_db  0.000GB
+emp_db        0.000GB
+local         0.000GB
+movies_db     0.000GB
+new_db        0.000GB
+shopping      0.000GB
+testDB        0.000GB
+> use movies_db
+switched to db movies_db
+> show collections
+movieDetails
+movies
+numbers
+top_10
+userDetails
+userPost
+userReview
+users
+> db.userReview.find().pretty()
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f6f"),
+        "email" : "ram12@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f70"),
+        "email" : "shyam12@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 102,
+                        "review" : "That movie was really very awesome",
+                        "watch_count" : 2,
+                        "rating" : 8.6
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f71"),
+        "email" : "mohit44@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was not that good",
+                        "watch_count" : 1,
+                        "rating" : 6.5
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f72"),
+        "email" : "ravi22@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was awesome",
+                        "watch_count" : 2,
+                        "rating" : 7.9
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f73"),
+        "email" : "sam77@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f74"),
+        "email" : "amit21@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 106,
+                        "review" : "That movie was good",
+                        "watch_count" : 1,
+                        "rating" : 8.8
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+> db.userReview.find({$and : [{"details.m_id" : 102}, {"details.watch_count" : {$gte : 3}}]}).pretty()
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f73"),
+        "email" : "sam77@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+> db.userReview.find({"details" : {$elemMatch : {m_id : 101, watch_count : {$gte : 3}}}}).pretty()
+{
+        "_id" : ObjectId("611f2fad87cc4376ff1d7f6f"),
+        "email" : "ram12@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611f303f87cc4376ff1d7f73"),
+        "email" : "sam77@gmail.com",
+        "details" : [
+                {
+                        "m_id" : 101,
+                        "review" : "That movie was good",
+                        "watch_count" : 3,
+                        "rating" : 7.9
+                },
+                {
+                        "m_id" : 102,
+                        "review" : "good",
+                        "watch_count" : 2,
+                        "rating" : 7.3
+                }
+        ]
+}
+> use shopping
+switched to db shopping
+> db.products.find({p_color : "silver"}, {p_color : {$elemMatch : {$eq : "black"}}}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "black" ] }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f") }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670") }
+> db.products.find({p_color : "silver"}, {p_color : {$elemMatch : {$eq : "gold"}}}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "gold" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d") }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "gold" ] }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f") }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670") }
+> db.products.find({p_color : "silver"}, {p_color : {$eq : "gold"}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Expression $eq takes exactly 2 arguments. 1 were passed in.",
+        "code" : 16020,
+        "codeName" : "Location16020"
+}
+> db.products.find({p_color : "silver"}, {p_color : "gold"}}).pretty()
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:57
+> db.products.find({p_color : "silver"}, {p_color : "gold"}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : "gold" }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : "gold" }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : "gold" }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f"), "p_color" : "gold" }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670"), "p_color" : "gold" }
+> db.products.find({p_color : "silver"}, {p_color : 1}).pretty()
+{
+        "_id" : ObjectId("6115ec83380c479ddaa2166c"),
+        "p_color" : [
+                "gold",
+                "silver",
+                "gray",
+                "black"
+        ]
+}
+{
+        "_id" : ObjectId("6115ecdb380c479ddaa2166d"),
+        "p_color" : [
+                "silver",
+                "blue",
+                "black"
+        ]
+}
+{
+        "_id" : ObjectId("6115ed1e380c479ddaa2166e"),
+        "p_color" : [
+                "gold",
+                "silver",
+                "black"
+        ]
+}
+{
+        "_id" : ObjectId("6115ed8f380c479ddaa2166f"),
+        "p_color" : [
+                "gray",
+                "silver"
+        ]
+}
+{
+        "_id" : ObjectId("6115ede5380c479ddaa21670"),
+        "p_color" : [
+                "gray",
+                "silver",
+                "blue"
+        ]
+}
+> db.products.find({p_color : "silver"}, {"p_color.$" : 1}).pretty()
+{ "_id" : ObjectId("6115ec83380c479ddaa2166c"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ecdb380c479ddaa2166d"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed1e380c479ddaa2166e"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ed8f380c479ddaa2166f"), "p_color" : [ "silver" ] }
+{ "_id" : ObjectId("6115ede5380c479ddaa21670"), "p_color" : [ "silver" ] }
+>
