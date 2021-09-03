@@ -1,0 +1,61 @@
+[
+    {
+        "p_id" : 101,
+        "p_name" : "Apple Macbook Pro",
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+            "p_rating" : 4.5,
+            "p_specs" : [
+                {
+                    "ram" : "8gb",
+                    "sdd/hdd" : 256,
+                    "p_price" : 88000,
+                    "p_available" : 15
+                },
+                {
+                    "ram" : "16gb",
+                    "sdd/hdd" : 512,
+                    "p_price" : 108000,
+                    "p_available" : 10
+                },
+                {
+                    "ram" : "16gb",
+                    "sdd/hdd" : 1024,
+                    "p_price" : 128000,
+                    "p_available" : 5
+                }
+            ]
+        }
+    },
+
+    {
+        "p_id" : 102,
+        "p_name" : "One Plus 9T",
+        "p_brand" : "One Plus",
+        "p_category" : "Mobile",
+        "p_details" : {
+            "p_rating" : 4.5,
+            "p_specs" : [
+                {
+                    "ram" : "8gb",
+                    "sdd/hdd" : 256,
+                    "p_price" : 88000,
+                    "p_available" : 15
+                },
+                {
+                    "ram" : "16gb",
+                    "sdd/hdd" : 512,
+                    "p_price" : 108000,
+                    "p_available" : 10
+                },
+                {
+                    "ram" : "16gb",
+                    "sdd/hdd" : 1024,
+                    "p_price" : 128000,
+                    "p_available" : 5
+                }
+            ]
+        }
+    }
+]

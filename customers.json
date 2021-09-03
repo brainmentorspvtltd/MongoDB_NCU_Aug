@@ -1,0 +1,20 @@
+[
+    {
+        "c_id" : "c_101",
+        "name" : "John",
+        "phone" : 8989889989,
+        "details" : {
+            "email" : "john12@gmail.com",
+            "address" : "Delhi"
+        }
+    },
+    {
+        "id" : "c_102",
+        "name" : "Mac",
+        "phone" : 8985589989,
+        "details" : {
+            "email" : "mac12@gmail.com",
+            "address" : "Pune"
+        }
+    }
+]

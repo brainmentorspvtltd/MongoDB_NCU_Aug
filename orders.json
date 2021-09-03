@@ -1,0 +1,22 @@
+[
+    {
+        "o_id" : "o_101",
+        "order_date" : "new Date('2021-12-12')",
+        "details" : 
+            {
+                "c_id" : "c_101",
+                "p_id" : 101,
+                "qty" : 1
+            }
+    },
+    {
+        "o_id" : "o_101",
+        "order_date" : "new Date('2021-12-12')",
+        "details" : 
+            {
+                "c_id" : "c_101",
+                "p_id" : 102,
+                "qty" : 2
+            }
+    }
+]
