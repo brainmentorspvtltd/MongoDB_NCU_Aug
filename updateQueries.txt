@@ -1,0 +1,3219 @@
+Update
+updateOne vs updateMany
+increment and decrement
+$min, $max, $mul
+remove field
+renaming of fields
+upsert - update + insert
+db.employees.updateOne({name : "Steve"}, 
+	{$set : 
+		{salary : 68000,
+		 department : "IT", 
+		 details : [
+			   {"designation":"Developer",exp:5},			   {"designation":"Senior Developer",exp:2}]
+		}}, 
+	{upsert : true})
+
+
+
+Updation Array
+Updating matched array elements only
+Update all array elements
+Updating specific fields
+How to add elements in array
+How to remove elements from the array
+
+
+
+> show dbs
+Flipkart      0.000GB
+TCS           0.000GB
+admin         0.000GB
+amazon_db     0.000GB
+config        0.000GB
+covid_db      0.000GB
+dataTypes_db  0.000GB
+db_1          0.000GB
+emp_db        0.000GB
+local         0.000GB
+movies_db     0.000GB
+netflix       0.000GB
+new_db        0.000GB
+shopping      0.000GB
+testDB        0.000GB
+> use emp_db
+switched to db emp_db
+> show collections
+empDetails
+employees
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+> db.employees.insertMany([
+...     {
+...         "name" : "John",
+...         "sal" : 46000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Team Leader",
+...                 "exp" : 3
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Mac",
+...         "sal" : 40000,
+...         "dept" : "Sales",
+...         "details" : [
+...             {
+...                 "designation" : "Sales Head",
+...                 "exp" : 3
+...             },
+...             {
+...                 "designation" : "Sales Manager",
+...                 "exp" : 1
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Shawn",
+...         "sal" : 35000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 2
+...             }
+...             {
+...                 "designation" : "Tester",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Project Manager",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Tom",
+...         "sal" : 58000,
+...         "dept" : "HR",
+...         "details" : [
+...             {
+...                 "designation" : "HR",
+...                 "exp" : 2
+...             },
+...             {
+...                 "designation" : "HR Manager",
+...                 "exp" : 1
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Max",
+...         "sal" : 88000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Senior Developer",
+...                 "exp" : 3
+...             },
+...             {
+...                 "designation" : "Team Leader",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Smith",
+...         "sal" : 50000,
+...         "dept" : "Sales",
+...         "details" : [
+...             {
+...                 "designation" : "Sales Head",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Sales Manager",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Ricky",
+...         "sal" : 20000,
+...         "dept" : "HR",
+...         "details" : [
+...             {
+...                 "designation" : "HR",
+...                 "exp" : 2
+...             }
+...         ]
+...     }
+... ])
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):41:12
+> db.employees.insertMany([
+...     {
+...         "name" : "John",
+...         "sal" : 46000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Team Leader",
+...                 "exp" : 3
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Mac",
+...         "sal" : 40000,
+...         "dept" : "Sales",
+...         "details" : [
+...             {
+...                 "designation" : "Sales Head",
+...                 "exp" : 3
+...             },
+...             {
+...                 "designation" : "Sales Manager",
+...                 "exp" : 1
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Shawn",
+...         "sal" : 35000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 2
+...             },
+...             {
+...                 "designation" : "Tester",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Project Manager",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Tom",
+...         "sal" : 58000,
+...         "dept" : "HR",
+...         "details" : [
+...             {
+...                 "designation" : "HR",
+...                 "exp" : 2
+...             },
+...             {
+...                 "designation" : "HR Manager",
+...                 "exp" : 1
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Max",
+...         "sal" : 88000,
+...         "dept" : "IT",
+...         "details" : [
+...             {
+...                 "designation" : "Developer",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Senior Developer",
+...                 "exp" : 3
+...             },
+...             {
+...                 "designation" : "Team Leader",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Smith",
+...         "sal" : 50000,
+...         "dept" : "Sales",
+...         "details" : [
+...             {
+...                 "designation" : "Sales Head",
+...                 "exp" : 4
+...             },
+...             {
+...                 "designation" : "Sales Manager",
+...                 "exp" : 2
+...             }
+...         ]
+...     },
+...     {
+...         "name" : "Ricky",
+...         "sal" : 20000,
+...         "dept" : "HR",
+...         "details" : [
+...             {
+...                 "designation" : "HR",
+...                 "exp" : 2
+...             }
+...         ]
+...     }
+... ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6131a4815831540864b16267"),
+                ObjectId("6131a4815831540864b16268"),
+                ObjectId("6131a4815831540864b16269"),
+                ObjectId("6131a4815831540864b1626a"),
+                ObjectId("6131a4815831540864b1626b"),
+                ObjectId("6131a4815831540864b1626c"),
+                ObjectId("6131a4815831540864b1626d")
+        ]
+}
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ]
+}
+> db.employees.updateOne({"_id" : ObjectId("611790d6c63bbea49bb840c3")}, {$set : {dept : "IT"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000,
+        "dept" : "IT"
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ]
+}
+> db.employees.updateOne({"_id" : ObjectId("611790d6c63bbea49bb840c3")}, {$set :
+... {details : [{designation : "Developer", exp : 3}]}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ]
+}
+> db.employees.updateMany({"details.designation" : "HR"}, {$set : {isMorningShift : true}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true
+}
+> db.employees.updateOne({name : "Ricky"}, {$set : {age : 30, phone : 9898989876}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "age" : 30,
+        "phone" : 9898989876
+}
+> db.employees.updateOne({name : "John"}, {$inc : {sal : 5000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 51000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+> db.employees.updateOne({name : "John"}, {$dec : {sal : 2000}})
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "Unknown modifier: $dec. Expected a valid update modifier or pipeline-style update specified as an array",
+        "op" : {
+                "q" : {
+                        "name" : "John"
+                },
+                "u" : {
+                        "$dec" : {
+                                "sal" : 2000
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "Unknown modifier: $dec. Expected a valid update modifier or pipeline-style update specified as an array",
+        "op" : {
+                "q" : {
+                        "name" : "John"
+                },
+                "u" : {
+                        "$dec" : {
+                                "sal" : 2000
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateOne@src/mongo/shell/crud_api.js:600:17
+@(shell):1:1
+> db.employees.updateOne({name : "John"}, {$inc : {sal : -2000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 49000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ]
+}
+> db.employees.updateOne({name : "John"}, {$inc : {sal : -2000}, $set:{isMorningShift : true}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 47000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true
+}
+> db.employees.updateOne({name : "John"}, {$inc : {sal : 2000}, $set:{sal : 60000}})
+WriteError({
+        "index" : 0,
+        "code" : 40,
+        "errmsg" : "Updating the path 'sal' would create a conflict at 'sal'",
+        "op" : {
+                "q" : {
+                        "name" : "John"
+                },
+                "u" : {
+                        "$inc" : {
+                                "sal" : 2000
+                        },
+                        "$set" : {
+                                "sal" : 60000
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 40,
+        "errmsg" : "Updating the path 'sal' would create a conflict at 'sal'",
+        "op" : {
+                "q" : {
+                        "name" : "John"
+                },
+                "u" : {
+                        "$inc" : {
+                                "sal" : 2000
+                        },
+                        "$set" : {
+                                "sal" : 60000
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateOne@src/mongo/shell/crud_api.js:600:17
+@(shell):1:1
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 45000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 30000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 50000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 88000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 47000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "age" : 30,
+        "phone" : 9898989876
+}
+> db.employees.updateOne({name : "John"}, {$min : {leaves : 3}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 47000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 3
+}
+> db.employees.updateOne({name : "John"}, {$min : {leaves : 5}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 47000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 3
+}
+> db.employees.updateOne({name : "John"}, {$set : {leaves : 5}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "John"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 47000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5
+}
+> db.employees.updateOne({name : "Shawn"}, {$max : {leaves : 5}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Shawn"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 5
+}
+> db.employees.updateOne({name : "Shawn"}, {$max : {leaves : 3}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.employees.find({name : "Shawn"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 5
+}
+> db.employees.updateOne({name : "Shawn"}, {$max : {leaves : 8}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Shawn"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8
+}
+> db.employees.updateMany({}, {$mul : {sal : 1.5}}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:48
+> db.employees.updateMany({}, {$mul : {sal : 1.5}})
+{ "acknowledged" : true, "matchedCount" : 11, "modifiedCount" : 11 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "sal" : 67500,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ]
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "sal" : 45000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "sal" : 75000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "sal" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "sal" : 70500,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "sal" : 60000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "sal" : 52500,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "sal" : 87000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "sal" : 132000,
+        "dept" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "sal" : 75000,
+        "dept" : "Sales",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ]
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 30000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "age" : 30,
+        "phone" : 9898989876
+}
+> db.employees.updateOne({name : "Ricky"}, {$set : {phone : null}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Ricky"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 30000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "age" : 30,
+        "phone" : null
+}
+> db.employees.updateOne({name : "Ricky"}, {$unset : {phone : ""}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Ricky"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 30000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "age" : 30
+}
+> db.employees.updateOne({name : "Ricky"}, {$unset : {age : null}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Ricky"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "sal" : 30000,
+        "dept" : "HR",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true
+}
+> db.employees.updateMany({}, {$rename : {sal : "salary", dept : "department"}})
+{ "acknowledged" : true, "matchedCount" : 11, "modifiedCount" : 11 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ],
+        "department" : "IT",
+        "salary" : 67500
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c4"),
+        "name" : "Shyam",
+        "salary" : 45000
+}
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16268"),
+        "name" : "Mac",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 1
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 60000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626d"),
+        "name" : "Ricky",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 30000
+}
+> db.employees.updateOne({name : "Steve"}, {$set : {salary : 68000, department : "IT"}})
+{ "acknowledged" : true, "matchedCount" : 0, "modifiedCount" : 0 }
+> db.employees.find({name : "Steve"}).pretty()
+> db.employees.updateOne({name : "Steve"}, {$set : {salary : 68000, department : "IT", details : [{"designation":"Developer",exp:5},{"designation":"Senior Developer",exp:2}]}},
+... {upsert : true})
+{
+        "acknowledged" : true,
+        "matchedCount" : 0,
+        "modifiedCount" : 0,
+        "upsertedId" : ObjectId("6131ad8a1b75b29eb4320b66")
+}
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 5
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find($and : [{"details.designation" : "Developer"}, {"details.exp" : {$gte :3}}]).pretty()
+SyntaxError: missing ) after argument list :
+@(shell):1:23
+> db.employees.find({$and : [{"details.designation" : "Developer"}, {"details.exp" : {$gte :3}}]}).pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c3"),
+        "name" : "Ram",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 3
+                }
+        ],
+        "department" : "IT",
+        "salary" : 67500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 5
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find({$and : [{"details.designation" : "Developer"}, {"details.exp" : {$gt :3}}]}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 5
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find({details : {$elemMatch : {desgination : "Developer", exp : {$gt : 4}}}}).pretty()
+> db.employees.find({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 5
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$set : {"details.$.promote" : true}}).pretty()
+TypeError: db.employees.updateMany(...).pretty is not a function :
+@(shell):1:1
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$set : {"details.$.promote" : true}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 5,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$set : {"details.$.exp" : {$inc : 1}}})
+WriteError({
+        "index" : 0,
+        "code" : 52,
+        "errmsg" : "The dollar ($) prefixed field '$inc' in 'details.0.exp.$inc' is not valid for storage.",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$.exp" : {
+                                        "$inc" : 1
+                                }
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 52,
+        "errmsg" : "The dollar ($) prefixed field '$inc' in 'details.0.exp.$inc' is not valid for storage.",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$.exp" : {
+                                        "$inc" : 1
+                                }
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$set : {"details.$" : {$inc : {exp : 1}}}})
+WriteError({
+        "index" : 0,
+        "code" : 52,
+        "errmsg" : "The dollar ($) prefixed field '$inc' in 'details.0.$inc' is not valid for storage.",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$" : {
+                                        "$inc" : {
+                                                "exp" : 1
+                                        }
+                                }
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 52,
+        "errmsg" : "The dollar ($) prefixed field '$inc' in 'details.0.$inc' is not valid for storage.",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$" : {
+                                        "$inc" : {
+                                                "exp" : 1
+                                        }
+                                }
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$inc : {"details.$.exp" : 1}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({details : {$elemMatch : {designation : "Developer", exp : {$gt : 4}}}}, {$inc : {"details.exp" : 1}})
+WriteError({
+        "index" : 0,
+        "code" : 28,
+        "errmsg" : "Cannot create field 'exp' in element {details: [ { designation: \"Developer\", exp: 6.0, promote: true }, { designation: \"Senior Developer\", exp: 2.0 } ]}",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 28,
+        "errmsg" : "Cannot create field 'exp' in element {details: [ { designation: \"Developer\", exp: 6.0, promote: true }, { designation: \"Senior Developer\", exp: 2.0 } ]}",
+        "op" : {
+                "q" : {
+                        "details" : {
+                                "$elemMatch" : {
+                                        "designation" : "Developer",
+                                        "exp" : {
+                                                "$gt" : 4
+                                        }
+                                }
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find({"details.exp" : {$gt : 3}}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find({"details.exp" : {$gt : 3}}).count()
+5
+> db.employees.find().count()
+12
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$.promote":true}})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 4 }
+> db.employees.find({"details.exp" : {$gt : 3}}).count()
+5
+> db.employees.find({"details.exp" : {$gt : 3}}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({salary : {$gt : 70000}}, {$inc : {"details.exp" : 1}})
+WriteError({
+        "index" : 0,
+        "code" : 28,
+        "errmsg" : "Cannot create field 'exp' in element {details: [ { designation: \"Developer\", exp: 4.0, promote: true }, { designation: \"Team Leader\", exp: 3.0 } ]}",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 28,
+        "errmsg" : "Cannot create field 'exp' in element {details: [ { designation: \"Developer\", exp: 4.0, promote: true }, { designation: \"Team Leader\", exp: 3.0 } ]}",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({salary : {$gt : 70000}}, {$inc : {"details.$.exp" : 1}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "The positional operator did not find the match needed from the query.",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "The positional operator did not find the match needed from the query.",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({salary : {$gt : 70000}}, {$inc : {"details.$[].exp" : 1}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$[].exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$[].exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({salary : {$gt : 70000}}, {$inc : {"details.$.exp" : 1}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "The positional operator did not find the match needed from the query.",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "The positional operator did not find the match needed from the query.",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$.exp" : 1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.find({"salary" : {$gt : 70000}}).count()
+6
+> db.employees.updateMany({salary : {$gt : 70000}}, {$inc : {"details.$[].exp" : -1}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$[].exp" : -1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$inc" : {
+                                "details.$[].exp" : -1
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.find({"salary" : {$gt : 70000}}).count()
+6
+> db.employees.find({"salary" : {$gt : 70000}})
+{ "_id" : ObjectId("611790d6c63bbea49bb840c5"), "name" : "Mohan", "salary" : 75000, "details" : { "exp" : 1 } }
+{ "_id" : ObjectId("611f495787cc4376ff1d7f8b"), "name" : "Ram", "salary" : 132000, "details" : { "exp" : 1 } }
+{ "_id" : ObjectId("6131a4815831540864b16267"), "name" : "John", "details" : [ { "designation" : "Developer", "exp" : 4, "promote" : true }, { "designation" : "Team Leader", "exp" : 3 } ], "isMorningShift" : true, "leaves" : 5, "department" : "IT", "salary" : 70500 }
+{ "_id" : ObjectId("6131a4815831540864b1626a"), "name" : "Tom", "details" : [ { "designation" : "HR", "exp" : 2 }, { "designation" : "HR Manager", "exp" : 1 } ], "isMorningShift" : true, "department" : "HR", "salary" : 87000 }
+{ "_id" : ObjectId("6131a4815831540864b1626b"), "name" : "Max", "details" : [ { "designation" : "Developer", "exp" : 4, "promote" : true }, { "designation" : "Senior Developer", "exp" : 3 }, { "designation" : "Team Leader", "exp" : 2 } ], "department" : "IT", "salary" : 132000 }
+{ "_id" : ObjectId("6131a4815831540864b1626c"), "name" : "Smith", "details" : [ { "designation" : "Sales Head", "exp" : 4, "promote" : true }, { "designation" : "Sales Manager", "exp" : 2 } ], "department" : "Sales", "salary" : 75000 }
+> db.employees.find({"salary" : {$gt : 70000}}).pretty()
+{
+        "_id" : ObjectId("611790d6c63bbea49bb840c5"),
+        "name" : "Mohan",
+        "salary" : 75000,
+        "details" : {
+                "exp" : 1
+        }
+}
+{
+        "_id" : ObjectId("611f495787cc4376ff1d7f8b"),
+        "name" : "Ram",
+        "salary" : 132000,
+        "details" : {
+                "exp" : 1
+        }
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4,
+                        "promote" : true
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$[el].promote":true}}, {arrayFilters : [{"el.exp" : {$gt : 3}}]})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 0 }
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$[el].branch":"Delhi"}}, {arrayFilters : [{"el.exp" : {$gt : 3}}]})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 5 }
+> db.employees.find({"details.exp" : {$gt : 3}}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateMany({salary : {$gt : 70000}}, {$set : {"details.$[].branch" : "Pune"}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[].branch" : "Pune"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Cannot apply array updates to non-array element details: { exp: 1.0 }",
+        "op" : {
+                "q" : {
+                        "salary" : {
+                                "$gt" : 70000
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[].branch" : "Pune"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$[el].branch":"Delhi"}}, {arrayFilters : [{"el.exp" : {$gt : 3}}, {"el.designation" : "Developer"}]})
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "Found multiple array filters with the same top-level field name el",
+        "op" : {
+                "q" : {
+                        "details.exp" : {
+                                "$gt" : 3
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[el].branch" : "Delhi"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false,
+                "arrayFilters" : [
+                        {
+                                "el.exp" : {
+                                        "$gt" : 3
+                                }
+                        },
+                        {
+                                "el.designation" : "Developer"
+                        }
+                ]
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "Found multiple array filters with the same top-level field name el",
+        "op" : {
+                "q" : {
+                        "details.exp" : {
+                                "$gt" : 3
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[el].branch" : "Delhi"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false,
+                "arrayFilters" : [
+                        {
+                                "el.exp" : {
+                                        "$gt" : 3
+                                }
+                        },
+                        {
+                                "el.designation" : "Developer"
+                        }
+                ]
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$[xe].branch":"Delhi"}}, {arrayFilters : [{"xe.exp" : {$gt : 3}}, {"el.designation" : "Developer"}]})
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "The array filter for identifier 'el' was not used in the update { $set: { details.$[xe].branch: \"Delhi\" } }",
+        "op" : {
+                "q" : {
+                        "details.exp" : {
+                                "$gt" : 3
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[xe].branch" : "Delhi"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false,
+                "arrayFilters" : [
+                        {
+                                "xe.exp" : {
+                                        "$gt" : 3
+                                }
+                        },
+                        {
+                                "el.designation" : "Developer"
+                        }
+                ]
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 9,
+        "errmsg" : "The array filter for identifier 'el' was not used in the update { $set: { details.$[xe].branch: \"Delhi\" } }",
+        "op" : {
+                "q" : {
+                        "details.exp" : {
+                                "$gt" : 3
+                        }
+                },
+                "u" : {
+                        "$set" : {
+                                "details.$[xe].branch" : "Delhi"
+                        }
+                },
+                "multi" : true,
+                "upsert" : false,
+                "arrayFilters" : [
+                        {
+                                "xe.exp" : {
+                                        "$gt" : 3
+                                }
+                        },
+                        {
+                                "el.designation" : "Developer"
+                        }
+                ]
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.employees.updateMany({"details.exp" : {$gt : 3}}, {$set : {"details.$[el].branch":"Delhi", "details.$[xe].floor":3}}, {arrayFilters : [{"el.exp" : {$gt : 3}}, {"xe.designation" : "Developer"}]})
+{ "acknowledged" : true, "matchedCount" : 5, "modifiedCount" : 4 }
+> db.employees.find({"details.exp" : {$gt : 3}}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b16267"),
+        "name" : "John",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi",
+                        "floor" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "leaves" : 5,
+        "department" : "IT",
+        "salary" : 70500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b16269"),
+        "name" : "Shawn",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 2,
+                        "floor" : 3
+                },
+                {
+                        "designation" : "Tester",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Project Manager",
+                        "exp" : 2
+                }
+        ],
+        "leaves" : 8,
+        "department" : "IT",
+        "salary" : 52500
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626b"),
+        "name" : "Max",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi",
+                        "floor" : 3
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 3
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "department" : "IT",
+        "salary" : 132000
+}
+{
+        "_id" : ObjectId("6131a4815831540864b1626c"),
+        "name" : "Smith",
+        "details" : [
+                {
+                        "designation" : "Sales Head",
+                        "exp" : 4,
+                        "promote" : true,
+                        "branch" : "Delhi"
+                },
+                {
+                        "designation" : "Sales Manager",
+                        "exp" : 2
+                }
+        ],
+        "department" : "Sales",
+        "salary" : 75000
+}
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true,
+                        "branch" : "Delhi",
+                        "floor" : 3
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+>
+
+
