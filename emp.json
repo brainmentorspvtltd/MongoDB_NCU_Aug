@@ -1,0 +1,111 @@
+[
+    {
+        "name" : "John",
+        "sal" : 46000,
+        "dept" : "IT",
+        "details" : [
+            {
+                "designation" : "Developer",
+                "exp" : 4
+            },
+            {
+                "designation" : "Team Leader",
+                "exp" : 3
+            }
+        ]
+    },
+    {
+        "name" : "Mac",
+        "sal" : 40000,
+        "dept" : "Sales",
+        "details" : [
+            {
+                "designation" : "Sales Head",
+                "exp" : 3
+            },
+            {
+                "designation" : "Sales Manager",
+                "exp" : 1
+            }
+        ]
+    },
+    {
+        "name" : "Shawn",
+        "sal" : 35000,
+        "dept" : "IT",
+        "details" : [
+            {
+                "designation" : "Developer",
+                "exp" : 2
+            },
+            {
+                "designation" : "Tester",
+                "exp" : 4
+            },
+            {
+                "designation" : "Project Manager",
+                "exp" : 2
+            }
+        ]
+    },
+    {
+        "name" : "Tom",
+        "sal" : 58000,
+        "dept" : "HR",
+        "details" : [
+            {
+                "designation" : "HR",
+                "exp" : 2
+            },
+            {
+                "designation" : "HR Manager",
+                "exp" : 1
+            }
+        ]
+    },
+    {
+        "name" : "Max",
+        "sal" : 88000,
+        "dept" : "IT",
+        "details" : [
+            {
+                "designation" : "Developer",
+                "exp" : 4
+            },
+            {
+                "designation" : "Senior Developer",
+                "exp" : 3
+            },
+            {
+                "designation" : "Team Leader",
+                "exp" : 2
+            }
+        ]
+    },
+    {
+        "name" : "Smith",
+        "sal" : 50000,
+        "dept" : "Sales",
+        "details" : [
+            {
+                "designation" : "Sales Head",
+                "exp" : 4
+            },
+            {
+                "designation" : "Sales Manager",
+                "exp" : 2
+            }
+        ]
+    },
+    {
+        "name" : "Ricky",
+        "sal" : 20000,
+        "dept" : "HR",
+        "details" : [
+            {
+                "designation" : "HR",
+                "exp" : 2
+            }
+        ]
+    }
+]
