@@ -1,0 +1,248 @@
+Add Elements in an array
+Remove Elements from array
+$addToSet
+
+> db.employees.updateOne({name : "Steve"}, {$push : {details : {"designation" : "Team Leader", exp : 2}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : ""Steve}).pretty()
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:28
+> db.employees.find({name : "Steve"}).pretty()
+{
+        "_id" : ObjectId("6131ad8a1b75b29eb4320b66"),
+        "name" : "Steve",
+        "department" : "IT",
+        "details" : [
+                {
+                        "designation" : "Developer",
+                        "exp" : 6,
+                        "promote" : true,
+                        "branch" : "Delhi",
+                        "floor" : 3
+                },
+                {
+                        "designation" : "Senior Developer",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Team Leader",
+                        "exp" : 2
+                }
+        ],
+        "salary" : 68000
+}
+> db.employees.updateOne({name : "Tom"}, {$push : {details : {$each : [{"designation" : "Senior HR Manager", exp : 3}, {"designation" : "Manager", exp : 2}], $sort : {exp : 1}}})
+... }
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:175
+> db.employees.updateOne({name : "Tom"}, {$push : {details : {$each : [{"designation" : "Senior HR Manager", exp : 3}, {"designation" : "Manager", exp : 2}], $sort : {exp : 1}}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                },
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Manager",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Senior HR Manager",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$pull : {details : {designation : "Manager"}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                },
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Senior HR Manager",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$pop : {details : 1}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR Manager",
+                        "exp" : 1
+                },
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$pop : {details : -1}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Tom"}).pretty()\
+uncaught exception: SyntaxError: invalid escape sequence :
+@(shell):1:42
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$push : {details : {$each : [{"designation" : "Senior HR Manager", exp : 3}, {"designation" : "Manager", exp : 2}], $sort : {exp : 1}}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Manager",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Senior HR Manager",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$addToSet : {details : {$each : [{"designation" : "Senior HR Manager", exp : 3}, {"designation" : "Manager", exp : 2}], $sort : {exp : 1}}}})
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Found unexpected fields after $each in $addToSet: { $each: [ { designation: \"Senior HR Manager\", exp: 3.0 }, { designation: \"Manager\", exp: 2.0 } ], $sort: { exp: 1.0 } }",
+        "op" : {
+                "q" : {
+                        "name" : "Tom"
+                },
+                "u" : {
+                        "$addToSet" : {
+                                "details" : {
+                                        "$each" : [
+                                                {
+                                                        "designation" : "Senior HR Manager",
+                                                        "exp" : 3
+                                                },
+                                                {
+                                                        "designation" : "Manager",
+                                                        "exp" : 2
+                                                }
+                                        ],
+                                        "$sort" : {
+                                                "exp" : 1
+                                        }
+                                }
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 2,
+        "errmsg" : "Found unexpected fields after $each in $addToSet: { $each: [ { designation: \"Senior HR Manager\", exp: 3.0 }, { designation: \"Manager\", exp: 2.0 } ], $sort: { exp: 1.0 } }",
+        "op" : {
+                "q" : {
+                        "name" : "Tom"
+                },
+                "u" : {
+                        "$addToSet" : {
+                                "details" : {
+                                        "$each" : [
+                                                {
+                                                        "designation" : "Senior HR Manager",
+                                                        "exp" : 3
+                                                },
+                                                {
+                                                        "designation" : "Manager",
+                                                        "exp" : 2
+                                                }
+                                        ],
+                                        "$sort" : {
+                                                "exp" : 1
+                                        }
+                                }
+                        }
+                },
+                "multi" : false,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateOne@src/mongo/shell/crud_api.js:600:17
+@(shell):1:1
+> db.employees.updateOne({name : "Tom"}, {$addToSet : {details : {"designation" : "Senior HR Manager", exp : 3}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.employees.find({name : "Tom"}).pretty()
+{
+        "_id" : ObjectId("6131a4815831540864b1626a"),
+        "name" : "Tom",
+        "details" : [
+                {
+                        "designation" : "HR",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Manager",
+                        "exp" : 2
+                },
+                {
+                        "designation" : "Senior HR Manager",
+                        "exp" : 3
+                }
+        ],
+        "isMorningShift" : true,
+        "department" : "HR",
+        "salary" : 87000
+}
+> db.employees.updateOne({name : "Tom"}, {$addToSet : {details : {"designation" : "Senior HR Manager", exp : 3}}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+>
