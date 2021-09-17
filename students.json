@@ -1,0 +1,193 @@
+[
+    {
+        "name" : "John",
+        "subjects" : ["physics", "chemistry", "math"],
+        "rollno" : 30,
+        "class" : 12,
+        "marks" : [
+            {
+                "theory" : 67,
+                "practical" : 10
+            },
+            {
+                "theory" : 79,
+                "practical" : 12
+            },
+            {
+                "theory" : 81,
+                "practical" : 19
+            }
+        ]
+    },
+    {
+        "name" : "Sam",
+        "subjects" : ["physics", "chemistry", "biology"],
+        "rollno" : 42,
+        "class" : 12,
+        "marks" : [
+            {
+                "theory" : 54,
+                "practical" : 21
+            },
+            {
+                "theory" : 70,
+                "practical" : 19
+            },
+            {
+                "theory" : 75,
+                "practical" : 18
+            }
+        ]
+    },
+    {
+        "name" : "Smith",
+        "subjects" : ["economica", "statistics", "math"],
+        "rollno" : 46,
+        "class" : 12,
+        "marks" : [
+            {
+                "theory" : 80,
+                "practical" : 20
+            },
+            {
+                "theory" : 88,
+                "practical" : 6
+            },
+            {
+                "theory" : 49,
+                "practical" : 20
+            }
+        ]
+    },
+    {
+        "name" : "Nick",
+        "subjects" : ["physics", "chemistry", "math", "biology"],
+        "rollno" : 35,
+        "class" : 12,
+        "marks" : [
+            {
+                "theory" : 67,
+                "practical" : 10
+            },
+            {
+                "theory" : 79,
+                "practical" : 12
+            },
+            {
+                "theory" : 81,
+                "practical" : 19
+            }
+        ]
+    },
+    {
+        "name" : "John",
+        "subjects" : ["physics", "chemistry", "math"],
+        "rollno" : 30,
+        "class" : 11,
+        "marks" : [
+            {
+                "theory" : 87,
+                "practical" : 10
+            },
+            {
+                "theory" : 70,
+                "practical" : 12
+            },
+            {
+                "theory" : 85,
+                "practical" : 19
+            }
+        ]
+    },
+    {
+        "name" : "Sam",
+        "subjects" : ["physics", "chemistry", "biology"],
+        "rollno" : 42,
+        "class" : 11,
+        "marks" : [
+            {
+                "theory" : 50,
+                "practical" : 25
+            },
+            {
+                "theory" : 80,
+                "practical" : 16
+            },
+            {
+                "theory" : 40,
+                "practical" : 20
+            }
+        ]
+    },
+    {
+        "name" : "Smith",
+        "subjects" : ["economics", "statistics", "math"],
+        "rollno" : 46,
+        "class" : 11,
+        "marks" : [
+            {
+                "theory" : 89,
+                "practical" : 10
+            },
+            {
+                "theory" : 56,
+                "practical" : 16
+            },
+            {
+                "theory" : 79,
+                "practical" : 21
+            }
+        ]
+    },
+    {
+        "name" : "Nick",
+        "subjects" : ["physics", "chemistry", "math", "biology"],
+        "rollno" : 35,
+        "class" : 11,
+        "marks" : [
+            {
+                "theory" : 55,
+                "practical" : 20
+            },
+            {
+                "theory" : 88,
+                "practical" : 10
+            },
+            {
+                "theory" : 64,
+                "practical" : 10
+            }
+        ]
+    },
+    {
+        "name" : "Jimmy",
+        "subjects" : ["c++","hindi"],
+        "rollno" : 27,
+        "class" : 10,
+        "marks" : [
+            {
+                "theory" : 90,
+                "practical" : 10
+            },
+            {
+                "theory" : 79
+            }
+        ]
+    },
+    {
+        "name" : "Shawn",
+        "subjects" : ["economics", "math"],
+        "rollno" : 42,
+        "class" : 10,
+        "marks" : [
+            {
+                "theory" : 91,
+                "practical" : 8
+            },
+            {
+                "theory" : 80,
+                "practical" : 18
+            }
+        ]
+    }
+]
