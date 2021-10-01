@@ -1,0 +1,70 @@
+Test Engine
+
+Students
+Teachers
+Test
+Questions
+Marks
+
+Students (5 students)
+- s_id : 101, 
+- s_name : 'John'
+- s_details : {
+	s_branch : '...',
+	s_year : ...,
+	s_sem : ...
+  }
+
+
+Teachers (4 students)
+- t_id : 201,
+- t_name : 'Mac',
+- t_branch : '...'
+
+Test (2-3)
+- test_id : 't_101',
+- test_details : {
+	t_id : 201
+	test_subject : "MongoDB",
+	test_marks : 50,
+	duration(mins) : 60
+	year : 2,
+	sem : 2
+  }
+
+Questions (3 ques for each test)
+- q_id : 'q1',
+- test_id : 't_101'
+- ques : [
+	{
+	    q1 : "This is ques_1 ?",
+	    opt_1 : "ans_1",
+	    opt_2 : "ans_2",
+	    opt_3 : "ans_3",
+	    opt_4 : "ans_4",
+	    ans : "opt_1"
+	},
+	{
+	    q1 : "This is ques_1 ?",
+	    opt_1 : "ans_1",
+	    opt_2 : "ans_2",
+	    opt_3 : "ans_3",
+	    opt_4 : "ans_4",
+	    ans : "opt_1"
+	}
+]
+
+
+Answers
+- t_id : 't_101'
+- s_id : 101
+- ans : [
+	    {q1 : 'opt_1'},
+	    {q2 : 'opt_2'},
+	    {q3 : 'opt_1'},
+	    {q4 : 'opt_4'},	
+	]
+
+
+
+
