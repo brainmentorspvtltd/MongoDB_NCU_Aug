@@ -1,0 +1,111 @@
+Graph Data Structure
+
+No Sql DB
+- Document DB
+- Graph DB
+
+
+select name from person left join person_dept on person.id = person_dept.id left join department on department.id = person_dept.dept_id where department.name = "IT"
+
+
+MATCH (p:person) - [:works_at] -> (d:dept)
+WHERE d.name = "IT"
+RETURN p.name
+
+
+MATCH(n) RETURN(n)
+
+create(person)
+create(bank), (employee);
+create(person:Ram)
+create(person:Shyam:Student:NCU)
+create(Mohan:Person{name:"Mohan Sharma", age:30, occupation : "Employee"})
+create(Mohan:Person{name:"Mohan Sharma", age:30, occupation : "Employee"}) RETURN Mohan
+
+Create RelationShip
+create(Rohan:person{name:"Rohan Sharma", age:30, occupation : "Employee"})
+create(HDFC:bank{name:"HDFC"})
+CREATE(Rohan)-[r:HAS_ACCOUNT_IN]->(HDFC)
+RETURN Rohan, HDFC
+
+
+Create Relationship with Existing Node
+MATCH(a:person), (b:bank) WHERE a.name="Manan Sharma" AND b.name="HDFC"
+CREATE(a) - [r:HAS_ACCOUNT_IN] -> (b)
+RETURN a,b
+
+MATCH(a:person), (b:Employee) WHERE a.name="Manan Sharma" AND b.name="BMPL"
+CREATE(a) - [r:WORKS_IN] -> (b)
+RETURN a,b
+
+Delete All Node
+MATCH(n) DETACH DELETE n
+
+create(Rohan:person{name:"Rohan Sharma", age:30, occupation : "Employee"})
+create(Mohan:person{name:"Mohan", age:31, occupation : "Employee"})
+create(Aman:person{name:"Aman Tyagi", age:25, occupation : "Employee"})
+create(Pooja:person{name:"Pooja Sharma", age:32, occupation : "Employee"})
+create(Ekta:person{name:"Ekta Gupta", age:33, occupation : "Employee"})
+
+
+create(HDFC:bank{name:"HDFC", branch:"Rohini"})
+create(ICICI:bank{name:"ICICI", branch:"NSP"})
+create(PNB:bank{name:"PNB", branch:"GZB"})
+
+MATCH(a:person), (b:bank) WHERE a.name="Rohan Sharma" AND b.name="ICICI"
+CREATE(a) - [r:HAS_ACCOUNT_IN] -> (b)
+RETURN a,b
+
+
+MATCH(a:person), (b:company) WHERE a.name="Mohan" AND b.name="Brain Mentors"
+CREATE(a) - [r:WORKS_IN] -> (b)
+
+
+CREATE(friend:Person {name : "John"})
+RETURN friend
+
+CREATE(mac:Person {name : "Mac"})
+CREATE(sam:Person {name : "Sam"})
+
+MATCH(sam:Person {name : "Sam"})
+MATCH(mac:Person {name : "Mac"})
+CREATE(sam)-[rel:IS_FRIENDS_WITH]->(mac)
+
+Update Query
+MATCH (p:Person {name : "Sam"})
+SET p.dob = date('1990-01-10')
+RETURN p
+
+
+Delete Node
+MATCH(s:Person {name:"Sam"})
+DELETE s
+
+
+Delete Relationship
+MATCH(s:Person {name:"Sam"}) - [r:IS_FRIENDS_WITH] -> (m:Person {name:"Mac"})
+DELETE r
+
+
+Delete Node Property
+MATCH(s:Person {name:"Sam"})
+REMOVE s.dob
+
+Delete Node Property Alternative
+MATCH(s:Person {name:"Sam"})
+SET s.dob=null
+
+Donot Create Another Mac if exists (Using Merge Instead of Create)
+MERGE(mac:Person {name : "Mac"})
+RETURN mac
+
+Donot Duplicate Relationship
+MATCH(sam:Person {name : "Sam"})
+MATCH(mac:Person {name : "Mac"})
+MERGE(sam)-[rel:IS_FRIENDS_WITH]->(mac)
+
+Filter Data
+MATCH(mac:Person {name : "Mac"})
+WHERE mac.age = 30
+RETURN mac
+
