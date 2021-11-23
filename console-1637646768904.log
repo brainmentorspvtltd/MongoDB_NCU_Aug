@@ -1,0 +1,22 @@
+var obj = {id:1001, name:'Amit'};
+undefined
+typeof obj;
+'object'
+obj instanceof Object;
+true
+typeof Object;
+'function'
+class A{}
+undefined
+typeof A;
+'function'
+var json = JSON.stringify(obj);
+undefined
+json;
+'{"id":1001,"name":"Amit"}'
+obj;
+{id: 1001, name: 'Amit'}
+typeof json;
+'string'
+typeof obj;
+'object'
