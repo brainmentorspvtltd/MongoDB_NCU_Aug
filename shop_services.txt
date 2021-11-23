@@ -1,0 +1,8 @@
+Services to be create for Shopping
+1. Product Add
+2. Product Display
+3. Product Search
+4. Add to Cart
+5. View Cart
+6. Order Book
+7. Order Details
