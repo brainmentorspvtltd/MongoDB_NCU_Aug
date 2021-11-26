@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Login Form</h1>
+
+    <form action="https://powerful-ridge-57033.herokuapp.com/login">
+        <table>
+            <tr>
+                <td>Enter Email</td>
+                <td>
+                    <input type="email" placeholder="Enter Email ID" id="email">
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Password</td>
+                <td>
+                    <input type="password" placeholder="Enter Password" id="pwd">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button onclick="login()">Login</button> 
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+    <script>
+        function login() {
+            var http = new XMLHttpRequest();
+            var details = {
+                "email" : document.querySelector("#email"),
+                "pwd" : document.querySelector("#pwd")
+            };
+            var data = JSON.stringify(details);
+            var url = "https://powerful-ridge-57033.herokuapp.com/login";
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200) {
+                    console.log(http.responseText);
+                }
+            }
+            http.open('post',url,true);
+            http.setRequestHeader('Content-Type','application/json');
+            http.send(data);
+        }
+    </script>
+    
+</body>
+</html>
