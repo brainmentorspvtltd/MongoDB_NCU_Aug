@@ -1,0 +1,14 @@
+.row {
+    display: flex;
+    justify-content: space-around;
+}
+
+aside {
+     border: 1px solid red;
+     width: 20%;
+     height: 500px;
+}
+main {
+    border: 1px solid blue;
+    width: 70%;
+}

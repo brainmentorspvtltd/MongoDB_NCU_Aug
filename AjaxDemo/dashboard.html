@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <h1>Dashboard for Shopping App</h1>
+
+    <div class="row">
+        <aside>
+            <ul>
+                <li>
+                    <a href="#" onclick="getOrders()">Get Orders</a>
+                </li>
+                <li>
+                    <a href="#" onclick="pay()">Payment</a>
+                </li>
+            </ul>
+        </aside>
+        <main>
+            <div class="row" id="products"></div>
+        </main>
+    </div>
+
+    <script>
+        function getOrders() {
+            var http = new XMLHttpRequest();
+            var div = document.querySelector("#products");
+            div.innerHTML = "";
+            var url = "https://powerful-ridge-57033.herokuapp.com/orders/1002";
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200) {
+                    // console.log(http.responseText);
+                    var productDiv = document.createElement("div");
+                    productDiv.className = "col";
+                    var p = document.createElement("p");
+                    p.innerText = http.responseText;
+                    productDiv.appendChild(p);
+                    div.appendChild(productDiv);
+                }
+            }
+            http.open('get',url,true);
+            http.setRequestHeader('Content-Type','application/json');
+            http.setRequestHeader("Authorization",localStorage.getItem("token"));
+            http.send();
+        }
+
+        function pay() {
+            var http = new XMLHttpRequest();
+            var div = document.querySelector("#products");
+            div.innerHTML = "";
+            var url = "https://powerful-ridge-57033.herokuapp.com/pay";
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200) {
+                    console.log(http.responseText);
+                    var productDiv = document.createElement("div");
+                    productDiv.className = "col";
+                    var p = document.createElement("p");
+                    p.innerText = http.responseText;
+                    productDiv.appendChild(p);
+                    div.appendChild(productDiv);
+                }
+            }
+            http.open('get',url,true);
+            http.setRequestHeader('Content-Type','application/json');
+            http.setRequestHeader("Authorization",localStorage.getItem("token"));
+            http.send();
+        }
+    </script>
+    
+</body>
+</html>

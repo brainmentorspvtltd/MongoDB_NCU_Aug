@@ -10,7 +10,7 @@
 
     <h1>Login Form</h1>
 
-    <form action="https://powerful-ridge-57033.herokuapp.com/login">
+    <div>
         <table>
             <tr>
                 <td>Enter Email</td>
@@ -32,20 +32,23 @@
             </tr>
         </table>
 
-    </form>
+    </div>
 
     <script>
         function login() {
             var http = new XMLHttpRequest();
             var details = {
-                "email" : document.querySelector("#email"),
-                "pwd" : document.querySelector("#pwd")
+                "email" : document.querySelector("#email").value,
+                "pwd" : document.querySelector("#pwd").value
             };
             var data = JSON.stringify(details);
             var url = "https://powerful-ridge-57033.herokuapp.com/login";
             http.onreadystatechange = function() {
                 if(http.readyState == 4 && http.status == 200) {
                     console.log(http.responseText);
+                    var json = JSON.parse(this.responseText);
+                    localStorage.setItem("token",json.token);
+                    location.href = "dashboard.html";
                 }
             }
             http.open('post',url,true);
